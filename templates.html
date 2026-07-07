@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>TrendPulse — Templates (Post 1080x1080 · Reels 1080x1920)</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505; --txt:#f4f4f5; --muted:#8b8f98;
+  --accent:#3B82F6; --green:#22ff9a;
+  --card:rgba(255,255,255,.05); --stroke:rgba(255,255,255,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#111;font-family:'Sora',sans-serif;color:var(--txt);padding:40px;display:flex;flex-wrap:wrap;gap:60px;justify-content:center}
+.how{width:100%;text-align:center;color:var(--muted);font-size:14px;line-height:1.7;max-width:720px;margin:0 auto 10px}
+.how b{color:var(--txt)}
+.wrap{display:flex;flex-direction:column;gap:14px;align-items:center}
+.wrap>span{font-size:13px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+
+/* ====== ARTBOARDS (tamanho real, com zoom para caber na tela) ====== */
+.post{width:1080px;height:1080px}
+.reel{width:1080px;height:1920px}
+.post,.reel{
+  background:var(--bg);position:relative;overflow:hidden;flex:0 0 auto;
+  transform:scale(.42);transform-origin:top center;
+}
+.wrap.p{height:calc(1080px*.42 + 40px)}
+.wrap.r{height:calc(1920px*.42 + 40px)}
+.post::before,.reel::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(700px 500px at 85% 10%, rgba(59,130,246,.16), transparent 60%),
+    radial-gradient(600px 500px at 10% 95%, rgba(59,130,246,.08), transparent 60%);
+}
+.inner{position:relative;height:100%;display:flex;flex-direction:column;padding:80px}
+.brand{font-family:'Unbounded';font-weight:800;font-size:38px}
+.brand span{color:var(--accent)}
+.head{display:flex;justify-content:space-between;align-items:center}
+.pill{
+  font-size:24px;color:var(--muted);border:2px solid var(--stroke);
+  border-radius:99px;padding:14px 30px;letter-spacing:.1em;
+}
+.today{margin-top:70px;font-size:30px;color:var(--muted);letter-spacing:.35em;text-transform:uppercase}
+.flag{font-size:44px;margin-top:8px}
+.kw{
+  font-family:'Unbounded';font-weight:800;font-size:110px;line-height:1.02;
+  letter-spacing:-.02em;margin-top:26px;
+}
+.reel .kw{font-size:130px;margin-top:40px}
+.growth{
+  display:inline-flex;align-self:flex-start;margin-top:44px;
+  background:rgba(34,255,154,.1);color:var(--green);
+  border:2px solid rgba(34,255,154,.25);
+  padding:20px 40px;border-radius:99px;font-weight:600;font-size:48px;
+}
+.why{margin-top:56px;font-size:34px;line-height:1.55;color:#c9ccd3;font-weight:300;max-width:860px}
+.ops{margin-top:56px;display:flex;flex-wrap:wrap;gap:18px}
+.op{
+  font-size:30px;padding:20px 34px;border-radius:22px;
+  background:rgba(59,130,246,.14);color:#9ec2ff;border:2px solid rgba(59,130,246,.3);
+}
+.score{
+  margin-top:auto;display:flex;align-items:center;gap:26px;
+  background:var(--card);border:2px solid var(--stroke);border-radius:40px;padding:34px 44px;
+  backdrop-filter:blur(30px);align-self:flex-start;
+}
+.score b{font-family:'Unbounded';font-size:72px;color:var(--accent)}
+.score div{font-size:26px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;line-height:1.5}
+.foot{
+  display:flex;justify-content:space-between;align-items:center;margin-top:60px;
+  padding-top:44px;border-top:2px solid var(--stroke);
+}
+.url{font-size:32px;font-weight:600}
+.url span{color:var(--accent)}
+.cta{font-size:28px;color:var(--muted)}
+/* reels specifics */
+.scene{position:absolute;top:60px;right:80px;font-size:26px;color:var(--muted);letter-spacing:.3em}
+.reel .today{margin-top:140px}
+.reel .why{font-size:44px;max-width:100%}
+.big-cta{
+  margin-top:auto;background:var(--accent);color:#fff;text-align:center;
+  font-size:44px;font-weight:600;padding:44px;border-radius:32px;
+  box-shadow:0 20px 60px rgba(59,130,246,.35);
+}
+.follow{margin-top:36px;text-align:center;font-size:34px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<p class="how">
+<b>Como exportar em 1080px reais:</b> abra o DevTools (F12) → clique com o botão direito no elemento
+<b>&lt;div class="post"&gt;</b> ou <b>&lt;div class="reel"&gt;</b> → <b>"Capture node screenshot"</b>.
+O Chrome salva o PNG no tamanho exato (1080×1080 / 1080×1920), ignorando o zoom da página.
+Troque os textos direto no HTML todo dia — o layout nunca muda.
+</p>
+
+<!-- ================= POST 1080x1080 ================= -->
+<div class="wrap p"><span>Post · Feed · 1080×1080</span>
+<div class="post"><div class="inner">
+  <div class="head">
+    <div class="brand">Trend<span>Pulse</span></div>
+    <div class="pill">07 JUL · TERÇA</div>
+  </div>
+
+  <div class="today">Hoje no Brasil</div>
+  <div class="flag">🇧🇷</div>
+  <div class="kw">🔥 PIX<br>PARCELADO</div>
+  <div class="growth">▲ +870% em buscas</div>
+
+  <div class="ops">
+    <span class="op">✔ Criar conteúdo</span>
+    <span class="op">✔ Afiliados</span>
+    <span class="op">✔ SaaS</span>
+    <span class="op">✔ Landing page SEO</span>
+  </div>
+
+  <div class="score"><b>96</b><div>Business<br>Score</div></div>
+
+  <div class="foot">
+    <div class="url">trendpulse<span>.com.br</span></div>
+    <div class="cta">A oportunidade de amanhã → segue</div>
+  </div>
+</div></div>
+</div>
+
+<!-- ================= REELS 1080x1920 (capa / cena 2) ================= -->
+<div class="wrap r"><span>Reels · 1080×1920 · Cena "revelação"</span>
+<div class="reel"><div class="inner">
+  <div class="scene">CENA 2 / 5</div>
+  <div class="head">
+    <div class="brand">Trend<span>Pulse</span></div>
+  </div>
+
+  <div class="today">A palavra mais buscada<br>no Google Brasil hoje é…</div>
+  <div class="flag">🇧🇷</div>
+  <div class="kw">PIX<br>PARCELADO</div>
+  <div class="growth">▲ +870%</div>
+
+  <div class="why">
+    Novas regras do Banco Central liberaram o parcelamento via Pix —
+    e milhões de pessoas querem saber como funciona.
+  </div>
+
+  <div class="score"><b>96</b><div>Business<br>Score</div></div>
+
+  <div class="big-cta">💰 Veja 4 formas de lucrar com isso →</div>
+  <div class="follow">@trendpulse · a oportunidade do dia, todo dia</div>
+</div></div>
+</div>
+
+</body>
+</html>

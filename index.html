@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>TrendPulse — A oportunidade do dia</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505;
+  --card:rgba(255,255,255,.045);
+  --stroke:rgba(255,255,255,.09);
+  --txt:#f4f4f5;
+  --muted:#8b8f98;
+  --accent:#3B82F6;
+  --accent-soft:rgba(59,130,246,.14);
+  --green:#22ff9a;
+  --radius:32px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;scroll-snap-type:y mandatory}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'Sora',sans-serif;
+}
+/* ambient glow behind the page */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:
+    radial-gradient(600px 400px at 70% 20%, rgba(59,130,246,.10), transparent 60%),
+    radial-gradient(500px 400px at 20% 85%, rgba(59,130,246,.06), transparent 60%);
+}
+/* ---------- PAGE (site centralizado, sem molde de iPhone) ---------- */
+.phone{
+  width:100%;
+  max-width:480px;
+  min-height:100dvh;
+  margin:0 auto;
+  background:transparent;
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  animation:pop .7s cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes pop{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+/* ---------- HEADER BACKGROUND (imagem ocupando a tela toda) ---------- */
+.phone-bg{
+  position:fixed;top:0;left:0;width:100%;height:500px;z-index:0;
+  background-size:cover;background-position:center;
+  pointer-events:none;
+}
+.phone-bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to bottom,
+    rgba(5,5,5,.25) 0%,
+    rgba(5,5,5,.15) 30%,
+    rgba(5,5,5,.55) 62%,
+    rgba(5,5,5,.92) 85%,
+    var(--bg) 100%);
+}
+/* ---------- TOP ---------- */
+.top{
+  position:relative;z-index:1;
+  padding:22px 24px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Unbounded';font-weight:800;font-size:17px}
+.logo span{color:var(--accent)}
+.live{
+  display:flex;align-items:center;gap:7px;
+  font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;
+  padding:7px 13px;border:1px solid var(--stroke);border-radius:99px;
+  background:rgba(255,255,255,.03);
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.date{position:relative;z-index:1;padding:0 24px 14px;font-size:13px;color:var(--muted)}
+.date b{color:var(--txt);font-weight:600}
+/* ---------- COUNTRY TABS ---------- */
+.tabs{
+  position:relative;z-index:1;
+  display:flex;gap:8px;padding:0 24px 16px;overflow-x:auto;scrollbar-width:none;
+  margin-top:130px;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto;padding:9px 16px;border-radius:99px;font-size:13px;
+  border:1px solid var(--stroke);color:var(--muted);cursor:pointer;
+  background:transparent;font-family:'Sora';transition:.25s;white-space:nowrap;
+}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.tab.soon{opacity:.45}
+/* ---------- FEED ---------- */
+.feed{
+  position:relative;z-index:1;
+  padding:0 16px;
+}
+.trend{
+  display:flex;flex-direction:column;justify-content:flex-start;
+  gap:14px;padding:6px 8px 24px;
+}
+.hero-card{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:var(--radius);
+  min-height:280px;
+  padding:22px 24px 26px;
+  backdrop-filter:blur(90px) saturate(180%);
+  -webkit-backdrop-filter:blur(90px) saturate(180%);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 20px 50px rgba(0,0,0,.35);
+}
+.hero-card::after{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.10) 45%,
+    rgba(0,0,0,.35) 100%);
+}
+.hero-card>*{position:relative;z-index:1}
+.rank{font-size:11px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+.kw{
+  font-family:'Unbounded';font-weight:800;font-size:34px;line-height:1.08;
+  margin-bottom:14px;letter-spacing:-.01em;
+  text-shadow:0 2px 16px rgba(0,0,0,.5);
+}
+.growth{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(34,255,154,.1);color:var(--green);
+  border:1px solid rgba(34,255,154,.22);
+  padding:8px 15px;border-radius:99px;font-weight:600;font-size:15px;
+}
+/* score */
+.score-row{display:flex;gap:12px}
+.score-card,.mini{
+  background:var(--card);border:1px solid var(--stroke);
+  border-radius:26px;padding:20px;backdrop-filter:blur(40px);
+}
+.score-card{flex:1;display:flex;align-items:center;gap:16px}
+.ring{position:relative;width:74px;height:74px;flex:0 0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6;stroke-linecap:round}
+.ring .bgc{stroke:rgba(255,255,255,.08)}
+.ring .fgc{stroke:var(--accent);stroke-dasharray:207;transition:stroke-dashoffset 1s ease}
+.ring b{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Unbounded';font-size:20px;
+}
+.label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.val{font-weight:600;font-size:15px}
+.mini{flex:1;display:flex;flex-direction:column;justify-content:center}
+/* sections */
+.section{
+  background:var(--card);border:1px solid var(--stroke);
+  border-radius:26px;padding:20px 22px;backdrop-filter:blur(40px);
+}
+.section h3{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:12px;
+}
+.section p{font-size:14px;line-height:1.65;color:#c9ccd3;font-weight:300}
+.ops{display:flex;flex-wrap:wrap;gap:8px}
+.op{
+  font-size:13px;padding:9px 14px;border-radius:14px;
+  background:var(--accent-soft);color:#9ec2ff;border:1px solid rgba(59,130,246,.25);
+}
+.spark{width:100%;height:56px;margin-top:4px}
+.spark polyline{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round}
+.spark .area{fill:url(#g);stroke:none}
+/* timeline */
+.timeline{display:flex;justify-content:center;padding-top:6px}
+.tl-track{display:flex;align-items:center;gap:8px;max-width:100%;overflow-x:auto;scrollbar-width:none;padding:2px}
+.tl-track::-webkit-scrollbar{display:none}
+.tl-item{display:flex;flex-direction:column;align-items:center;gap:6px;flex:0 0 auto}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);opacity:.45}
+.tl-item.current .tl-dot{width:11px;height:11px;background:var(--accent);opacity:1;box-shadow:0 0 0 5px var(--accent-soft)}
+.tl-label{font-size:10px;color:var(--muted);letter-spacing:.03em;white-space:nowrap;max-width:76px;overflow:hidden;text-overflow:ellipsis}
+.tl-item.current .tl-label{color:var(--txt);font-weight:600;font-size:11.5px}
+.tl-line{width:22px;height:1px;background:var(--stroke);flex:0 0 auto}
+/* push CTA */
+.push{
+  margin:0;width:100%;
+  background:var(--accent);border:none;color:#fff;
+  font-family:'Sora';font-weight:600;font-size:15px;
+  padding:16px;border-radius:20px;cursor:pointer;
+  box-shadow:0 8px 30px rgba(59,130,246,.35);
+  transition:.25s;
+}
+.push:active{transform:scale(.97)}
+.push.done{background:rgba(34,255,154,.12);color:var(--green);box-shadow:none;border:1px solid rgba(34,255,154,.25)}
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);
+  background:#16181c;border:1px solid var(--stroke);border-radius:16px;
+  padding:12px 18px;font-size:13px;opacity:0;pointer-events:none;transition:.35s;
+  white-space:nowrap;z-index:10;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="phone-bg" id="phoneBg"></div>
+
+<div class="phone">
+  <div class="top">
+    <div class="logo">Trend<span>Pulse</span></div>
+    <div class="live"><span class="dot"></span> Ao vivo</div>
+  </div>
+  <div class="date" id="date"></div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="feed" id="feed"></div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+/* =========================================================
+   DADOS — hoje é manual. Depois, um script busca no Google
+   Trends + IA gera resumo/score e grava este mesmo JSON.
+========================================================= */
+const DATA = {
+  br: {
+    name:"🇧🇷 Brasil", live:true, headerImg:"images/Brasil.jpg.webp",
+    trends:[
+      {kw:"PIX Parcelado", growth:"+870%", score:96, vol:"1,2M buscas", comp:"Média",
+       img:"", why:"Novas regras do Banco Central liberaram o parcelamento via Pix, e bancos correram para anunciar o recurso. Milhares de pessoas buscam como funciona, taxas e quais bancos já oferecem.",
+       ops:["Comparador de bancos","Canal no YouTube","Landing page SEO","Afiliados fintech","Micro-SaaS financeiro"],
+       chart:[4,5,6,6,8,11,16,26,44,78]},
+      {kw:"FGTS Saque", growth:"+310%", score:81, vol:"890K buscas", comp:"Alta",
+       img:"", why:"Novo calendário de saque extraordinário anunciado nesta semana movimentou as buscas por datas, valores e quem tem direito.",
+       ops:["Conteúdo explicativo","Calculadora online","Newsletter finanças","Afiliados de crédito"],
+       chart:[10,11,10,12,14,13,18,25,31,40]},
+      {kw:"Agentes de IA", growth:"+240%", score:92, vol:"640K buscas", comp:"Alta",
+       img:"", why:"Empresas brasileiras começaram a adotar agentes de IA para atendimento e vendas, puxando buscas por cursos, ferramentas e consultoria.",
+       ops:["Consultoria de IA","Curso online","Automação para PMEs","Templates prontos"],
+       chart:[8,9,12,13,15,19,22,27,33,38]}
+    ]
+  },
+  us:{name:"🇺🇸 USA", live:false},
+  eu:{name:"🇪🇺 Europa", live:false},
+  as:{name:"🇯🇵 Ásia", live:false}
+};
+const ORDER = ["br","us","eu","as"];
+let current = "br";
+
+/* date */
+const d = new Date();
+document.getElementById("date").innerHTML =
+  `Bom dia. Hoje é <b>${d.toLocaleDateString('pt-BR',{weekday:'long', day:'numeric', month:'long'})}</b>.`;
+
+/* tabs */
+const tabsEl = document.getElementById("tabs");
+ORDER.forEach(k=>{
+  const b=document.createElement("button");
+  b.className="tab"+(k===current?" active":"")+(DATA[k].live?"":" soon");
+  b.textContent=DATA[k].name+(DATA[k].live?"":" · em breve");
+  b.onclick=()=>setCountry(k);
+  tabsEl.appendChild(b);
+});
+
+/* fundo do topo: usa headerImg do país se houver, senão um gradiente temático */
+const COUNTRY_GRADIENT = {
+  br:"radial-gradient(120% 90% at 50% -10%, rgba(34,197,94,.35), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(250,204,21,.22), transparent 60%), linear-gradient(160deg, hsl(217 45% 14%), #0a0a0b 80%)",
+  us:"radial-gradient(120% 90% at 50% -10%, rgba(239,68,68,.30), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(59,130,246,.25), transparent 60%), linear-gradient(160deg, hsl(220 45% 14%), #0a0a0b 80%)",
+  eu:"radial-gradient(120% 90% at 50% -10%, rgba(59,130,246,.32), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(250,204,21,.20), transparent 60%), linear-gradient(160deg, hsl(225 45% 14%), #0a0a0b 80%)",
+  as:"radial-gradient(120% 90% at 50% -10%, rgba(244,63,94,.30), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(255,255,255,.10), transparent 60%), linear-gradient(160deg, hsl(210 45% 14%), #0a0a0b 80%)"
+};
+function renderHeaderBg(k){
+  const c=DATA[k];
+  const bg=document.getElementById("phoneBg");
+  bg.style.backgroundImage = c.headerImg ? `url('${c.headerImg}')` : COUNTRY_GRADIENT[k];
+}
+
+function setCountry(k){
+  current=k;
+  [...tabsEl.children].forEach((t,i)=>t.classList.toggle("active",ORDER[i]===k));
+  renderHeaderBg(k);
+  render();
+}
+
+/* timeline: até 3 tendências já vistas à esquerda + a palavra do dia (atual) em destaque */
+function timeline(trends,i){
+  const past = trends.slice(Math.max(0,i-3), i);
+  const items = past.map(p=>`
+      <div class="tl-item past"><span class="tl-dot"></span><span class="tl-label">${p.kw}</span></div>
+      <span class="tl-line"></span>`).join("");
+  return `<div class="timeline"><div class="tl-track">
+    ${items}
+    <div class="tl-item current"><span class="tl-dot"></span><span class="tl-label">${trends[i].kw}</span></div>
+  </div></div>`;
+}
+
+/* sparkline builder */
+function spark(points){
+  const w=300,h=56,max=Math.max(...points);
+  const step=w/(points.length-1);
+  const pts=points.map((p,i)=>`${i*step},${h-4-(p/max)*(h-10)}`).join(" ");
+  const area=`0,${h} ${pts} ${w},${h}`;
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(59,130,246,.35)"/><stop offset="1" stop-color="rgba(59,130,246,0)"/>
+    </linearGradient></defs>
+    <polygon class="area" points="${area}"/><polyline points="${pts}"/></svg>`;
+}
+
+/* feed render */
+function render(){
+  const feed=document.getElementById("feed");
+  const c=DATA[current];
+  if(!c.live){
+    feed.innerHTML=`<div class="trend"><div class="hero-card" style="text-align:center;padding:60px 24px">
+      <div class="rank">${c.name}</div>
+      <div class="kw" style="font-size:26px">Em breve.</div>
+      <p style="color:var(--muted);font-size:14px;line-height:1.6">Estamos começando pelo Brasil.<br>Ative os alertas para saber quando ${c.name.slice(5)} entrar no ar.</p>
+      <br><button class="push" onclick="askPush()">🔔 Ativar alertas</button>
+    </div></div>`;
+    return;
+  }
+  const i=c.trends.length-1;
+  const t=c.trends[i];
+  feed.innerHTML = `
+    <div class="trend">
+      <div class="hero-card">
+        <div class="rank">Tendência do dia · ${c.name}</div>
+        <div class="kw">🔥 ${t.kw}</div>
+        <span class="growth">▲ ${t.growth} hoje</span>
+      </div>
+
+      <div class="score-row">
+        <div class="score-card">
+          <div class="ring">
+            <svg width="74" height="74"><circle class="bgc" cx="37" cy="37" r="33"/>
+            <circle class="fgc" cx="37" cy="37" r="33" style="stroke-dashoffset:${207-207*t.score/100}"/></svg>
+            <b>${t.score}</b>
+          </div>
+          <div><div class="label">Business Score</div><div class="val">${t.score>=90?"Excepcional":t.score>=80?"Muito alto":"Alto"}</div></div>
+        </div>
+        <div class="mini"><div class="label">Volume</div><div class="val">${t.vol}</div>
+        <div class="label" style="margin-top:10px">Concorrência</div><div class="val">${t.comp}</div></div>
+      </div>
+
+      <div class="section"><h3>🧠 Por que explodiu</h3><p>${t.why}</p></div>
+
+      <div class="section"><h3>💰 Como ganhar dinheiro</h3>
+        <div class="ops">${t.ops.map(o=>`<span class="op">${o}</span>`).join("")}</div>
+      </div>
+
+      <div class="section"><h3>📈 Últimos 10 dias</h3>${spark(t.chart)}</div>
+
+      <button class="push" id="pushBtn" onclick="askPush()">🔔 Receber a oportunidade de amanhã</button>
+      ${timeline(c.trends,i)}
+    </div>`;
+}
+
+/* push permission (demo local — em produção: Firebase Cloud Messaging) */
+function askPush(){
+  if(!("Notification" in window)){toast("Seu navegador não suporta push");return;}
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){
+      const b=document.getElementById("pushBtn");
+      if(b){b.textContent="✓ Alertas ativados";b.classList.add("done");}
+      new Notification("TrendPulse 🔥",{body:"Você receberá a oportunidade do dia todas as manhãs."});
+      toast("Alertas ativados!");
+    } else toast("Permissão negada");
+  });
+}
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2400);
+}
+
+/* keyboard ← → to switch country */
+document.addEventListener("keydown",e=>{
+  const i=ORDER.indexOf(current);
+  if(e.key==="ArrowRight") setCountry(ORDER[(i+1)%ORDER.length]);
+  if(e.key==="ArrowLeft") setCountry(ORDER[(i-1+ORDER.length)%ORDER.length]);
+});
+/* swipe horizontal to switch country */
+let sx=null;
+document.addEventListener("touchstart",e=>sx=e.touches[0].clientX);
+document.addEventListener("touchend",e=>{
+  if(sx===null)return;
+  const dx=e.changedTouches[0].clientX-sx;
+  const i=ORDER.indexOf(current);
+  if(dx<-70) setCountry(ORDER[(i+1)%ORDER.length]);
+  if(dx>70) setCountry(ORDER[(i-1+ORDER.length)%ORDER.length]);
+  sx=null;
+});
+
+/* PWA */
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+
+renderHeaderBg(current);
+render();
+</script>
+</body>
+</html>
