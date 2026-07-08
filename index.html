@@ -49,28 +49,30 @@ body::before{
 @keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 /* ---------- BENTO GRID ---------- */
 .layout{
-  flex:1;min-height:0;
+  flex:1;min-height:0;overflow-y:auto;
   display:grid;gap:12px;padding:14px 0 18px;
   grid-template-columns:1.2fr 1fr 1fr 1fr;
-  grid-template-rows:repeat(4,minmax(0,1fr));
+  grid-template-rows:repeat(4,auto);
+  align-content:start;
   grid-template-areas:
     "main    regions why     why"
     "main    regions money   news"
-    "main    related devices news"
-    "main    compare season  spark";
+    "main    related share   news"
+    "main    related rank    rank";
 }
 .layout>*{min-width:0;min-height:0}
 .a-main{grid-area:main;display:flex;flex-direction:column;gap:12px;min-height:0}
-.a-main .hero-card{flex:1;min-height:0}
+.a-main .hero-card{flex:0 0 calc(50% - 6px);min-height:0}
+.a-main .score-card{flex:1.3;min-height:0}
+.a-main .mini{flex:1;min-height:0;align-items:center}
+.a-main .cta-box{flex:1;min-height:0}
 .a-regions{grid-area:regions}
 .a-related{grid-area:related}
 .a-why{grid-area:why}
 .a-money{grid-area:money}
 .a-news{grid-area:news}
-.a-devices{grid-area:devices}
-.a-compare{grid-area:compare}
-.a-season{grid-area:season}
-.a-spark{grid-area:spark}
+.a-share{grid-area:share}
+.a-rank{grid-area:rank}
 .wide{grid-column:1/-1;grid-row:1/-1}
 .cta-box{display:flex;flex-direction:column;justify-content:center;gap:12px}
 @media (max-width:1180px){
@@ -162,7 +164,7 @@ body::before{
 .mini{display:flex;justify-content:space-around;text-align:center;gap:12px}
 .mini>div{min-width:0}
 .ring{position:relative;width:82px;height:82px;flex:0 0 auto}
-.ring svg{transform:rotate(-90deg)}
+.ring svg{transform:rotate(-90deg);overflow:visible}
 .ring circle{fill:none;stroke-width:6;stroke-linecap:round}
 .ring .bgc{stroke:var(--line-soft)}
 .ring .fgc{
@@ -198,12 +200,17 @@ body::before{
   font-family:'JetBrains Mono';
 }
 /* spotlight (estilo Apple keynote: número gigante + legenda pequena) */
-.spot{text-align:center;padding:4px 0 18px}
+.spot{text-align:center;padding:0 0 18px}
+.spot-icon{width:50px;height:auto;margin:0 auto 12px;display:block;overflow:visible}
+.spot-icon rect:not(.win){fill:none;stroke:var(--signal);stroke-width:2}
+.spot-icon .win{fill:var(--go);animation:twinkle 2.6s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.15}50%{opacity:1}}
 .spot-num{
   font-family:'Archivo Black';font-weight:400;font-size:24px;line-height:1.1;
   text-transform:uppercase;color:var(--ink);
 }
 .spot-sub{margin-top:7px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.a-regions .fill{justify-content:flex-end}
 /* regiões */
 .region-row{display:flex;align-items:center;gap:10px;margin-bottom:11px}
 .region-row:last-child{margin-bottom:0}
@@ -329,54 +336,34 @@ body::before{
    DADOS — hoje é manual. Depois, um script busca no Google
    Trends + IA gera resumo/score e grava este mesmo JSON.
 ========================================================= */
+/* Dados REAIS coletados em 08/07/2026:
+   - ranking e tráfego: RSS oficial trends.google.com/trending/rss?geo=BR
+   - regiões: API interest-by-region do Google Trends
+   - notícias: URLs reais vindas do próprio feed */
 const DATA = {
   br: {
     name:"🇧🇷 Brasil", live:true,
     trends:[
-      {kw:"PIX Parcelado", growth:"+870%", score:96, vol:"1,2M buscas", comp:"Média",
-       img:"", why:"Novas regras do Banco Central liberaram o parcelamento via Pix, e bancos correram para anunciar o recurso. Milhares de pessoas buscam como funciona, taxas e quais bancos já oferecem.",
-       ops:["Comparador de bancos","Canal no YouTube","Landing page SEO","Afiliados fintech","Micro-SaaS financeiro"],
-       chart:[4,5,6,6,8,11,16,26,44,78],
-       peak:"pico às 12h e 19h",
-       regions:[{name:"São Paulo",val:100},{name:"Rio de Janeiro",val:82},{name:"Minas Gerais",val:71},{name:"Bahia",val:58},{name:"Paraná",val:52}],
-       related:[{q:"como funciona o pix parcelado",breakout:true},{q:"pix parcelado quais bancos",breakout:true},{q:"pix parcelado taxa de juros",breakout:false},{q:"pix parcelado nubank",breakout:false},{q:"pix parcelado itaú",breakout:false}],
-       devices:{mobile:81,desktop:16,tablet:3},
-       compare:[{name:"Pix Parcelado",val:100},{name:"Parcelamento sem cartão",val:54},{name:"Crédito consignado",val:38}],
-       news:[{title:"Bancos liberam pix parcelado a partir desta semana",source:"Valor Econômico",time:"3h atrás"},{title:"BC detalha regras do novo pix parcelado",source:"G1",time:"7h atrás"},{title:"Como funciona o pix parcelado passo a passo",source:"UOL",time:"1d atrás"}],
-       season:[22,24,26,28,30,33,38,44,52,63,78,96]},
-      {kw:"FGTS Saque", growth:"+310%", score:81, vol:"890K buscas", comp:"Alta",
-       img:"", why:"Novo calendário de saque extraordinário anunciado nesta semana movimentou as buscas por datas, valores e quem tem direito.",
-       ops:["Conteúdo explicativo","Calculadora online","Newsletter finanças","Afiliados de crédito"],
-       chart:[10,11,10,12,14,13,18,25,31,40],
-       peak:"pico às 9h",
-       regions:[{name:"Bahia",val:100},{name:"Pernambuco",val:88},{name:"Ceará",val:76},{name:"São Paulo",val:64},{name:"Pará",val:55}],
-       related:[{q:"calendário fgts 2026",breakout:true},{q:"quem tem direito ao saque fgts",breakout:true},{q:"fgts saque aniversário",breakout:false},{q:"consultar fgts caixa",breakout:false}],
-       devices:{mobile:74,desktop:22,tablet:4},
-       compare:[{name:"FGTS Saque",val:100},{name:"Saque-aniversário",val:71},{name:"Auxílio Brasil",val:33}],
-       news:[{title:"Caixa divulga novo calendário de saque do FGTS",source:"G1",time:"5h atrás"},{title:"Quem tem direito ao saque extraordinário do FGTS",source:"Folha",time:"9h atrás"},{title:"Veja como consultar o saldo do FGTS pelo app",source:"UOL",time:"1d atrás"}],
-       season:[40,38,35,33,36,40,45,50,58,66,74,88]},
-      {kw:"Agentes de IA", growth:"+240%", score:92, vol:"640K buscas", comp:"Alta",
-       img:"", why:"Empresas brasileiras começaram a adotar agentes de IA para atendimento e vendas, puxando buscas por cursos, ferramentas e consultoria.",
-       ops:["Consultoria de IA","Curso online","Automação para PMEs","Templates prontos"],
-       chart:[8,9,12,13,15,19,22,27,33,38],
-       peak:"pico às 21h",
-       regions:[{name:"São Paulo",val:100},{name:"Distrito Federal",val:74},{name:"Santa Catarina",val:66},{name:"Rio Grande do Sul",val:61},{name:"Rio de Janeiro",val:59}],
-       related:[{q:"como criar um agente de ia",breakout:true},{q:"agentes de ia para whatsapp",breakout:true},{q:"curso agentes de ia",breakout:false},{q:"agentes de ia n8n",breakout:false},{q:"agentes de ia grátis",breakout:false}],
-       devices:{mobile:63,desktop:34,tablet:3},
-       compare:[{name:"Agentes de IA",val:100},{name:"ChatGPT",val:88},{name:"Automação RPA",val:41}],
-       news:[{title:"Empresas brasileiras aceleram adoção de agentes de IA",source:"Exame",time:"2h atrás"},{title:"Como criar um agente de IA sem programar",source:"Olhar Digital",time:"6h atrás"},{title:"Mercado de consultoria em IA cresce 3x em 2026",source:"Valor Econômico",time:"1d atrás"}],
-       season:[18,20,22,25,29,34,40,47,55,64,74,92]},
-      {kw:"Drex", growth:"+680%", score:95, vol:"1,4M buscas", comp:"Baixa",
-       img:"", why:"O Banco Central anunciou a fase aberta ao público do Drex, o real digital. Milhões de pessoas buscam o que é, como vai funcionar no dia a dia e o que muda em relação ao Pix.",
-       ops:["Conteúdo explicativo","Curso de finanças digitais","Newsletter especializada","Canal no YouTube","Consultoria para empresas"],
-       chart:[3,4,4,5,7,10,15,24,41,72],
-       peak:"pico às 8h e 20h",
-       regions:[{name:"São Paulo",val:100},{name:"Distrito Federal",val:86},{name:"Rio de Janeiro",val:79},{name:"Minas Gerais",val:63},{name:"Paraná",val:57}],
-       related:[{q:"o que é drex",breakout:true},{q:"drex é diferente do pix",breakout:true},{q:"como usar o drex",breakout:true},{q:"drex banco central",breakout:false},{q:"drex vale a pena",breakout:false}],
-       devices:{mobile:77,desktop:20,tablet:3},
-       compare:[{name:"Drex",val:100},{name:"Pix",val:64},{name:"Bitcoin",val:48}],
-       news:[{title:"BC libera Drex para o público em fase inicial",source:"Valor Econômico",time:"1h atrás"},{title:"Drex x Pix: entenda a diferença na prática",source:"G1",time:"4h atrás"},{title:"Bancos preparam carteiras digitais para o Drex",source:"InfoMoney",time:"9h atrás"}],
-       season:[5,6,7,8,10,13,17,24,33,45,60,88]}
+      {kw:"Feriado 9 de Julho", growth:"5 mil+ buscas", score:72, vol:"5 mil+ buscas", comp:"Baixa",
+       why:"Véspera do feriado da Revolução Constitucionalista (9/7), feriado estadual de São Paulo. As buscas por \"o que abre e o que fecha\", emendas de feriado e programação dispararam no estado inteiro.",
+       ops:["Guia \"abre e fecha\" local","Conteúdo SEO de última hora","Roteiros bate-volta SP","Pautas para portais locais"],
+       regions:[{name:"São Paulo",val:100},{name:"Roraima",val:18},{name:"Sergipe",val:7},{name:"Minas Gerais",val:6},{name:"Mato Grosso do Sul",val:6}],
+       regionNote:"fonte: Google Trends · hoje",
+       topToday:[
+         {name:"Feriado 9 de julho", traffic:"5 mil+", val:5000},
+         {name:"Petróleo Brent", traffic:"2 mil+", val:2000},
+         {name:"Quem Ama Cuida?", traffic:"2 mil+", val:2000},
+         {name:"Vôlei feminino", traffic:"1 mil+", val:1000},
+         {name:"Angélica", traffic:"1 mil+", val:1000}
+       ],
+       news:[
+         {title:"Veja o que abre e o que fecha no feriado da Revolução Constitucionalista em Ribeirão Preto e Franca",source:"G1",time:"hoje",
+          url:"https://g1.globo.com/sp/ribeirao-preto-franca/noticia/2026/07/08/veja-o-que-abre-e-o-que-fecha-no-feriado-da-revolucao-constitucionalista-em-ribeirao-preto-e-franca.ghtml"},
+         {title:"Confira o funcionamento da cidade na quinta-feira, 09/07, feriado da Revolução Constitucionalista",source:"Pref. Piracicaba",time:"hoje",
+          url:"https://piracicaba.sp.gov.br/noticias/confira-o-funcionamento-da-cidade-na-quinta-feira-09-07-feriado-da-revolucao-constitucionalista/"},
+         {title:"\"Abre e fecha\" do feriado da Revolução de 1932 – de 09 a 12 de julho",source:"Pref. Itapetininga",time:"hoje",
+          url:"https://www.itapetininga.sp.gov.br/noticia/10511/abre-e-fecha-do-feriado-da-revolucao-de-1932-de-09-a-12-de-julho/"}
+       ]}
     ]
   },
   us:{name:"🇺🇸 USA", live:false},
@@ -432,52 +419,72 @@ function timeline(trends,i){
   </div></div>`;
 }
 
-/* sparkline builder (com ponto pulsante no fim) */
-function spark(points){
-  const w=300,h=64,max=Math.max(...points);
-  const step=w/(points.length-1);
-  const coords=points.map((p,i)=>[i*step, h-6-(p/max)*(h-14)]);
-  const pts=coords.map(c=>c.join(",")).join(" ");
-  const area=`0,${h} ${pts} ${w},${h}`;
-  const [ex,ey]=coords[coords.length-1];
-  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
-    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="rgba(46,232,138,.35)"/><stop offset="1" stop-color="rgba(46,232,138,0)"/>
-    </linearGradient></defs>
-    <polygon class="area" points="${area}"/><polyline points="${pts}"/>
-    <circle class="enddot" cx="${ex}" cy="${ey}" r="4"/></svg>`;
-}
-
 /* regiões: destaque gigante da líder + barras das demais */
-function regionBlock(regions,peak){
+function regionBlock(regions,note){
   const [top,...rest]=regions;
-  const bars=rest.map(r=>`
+  const bars=rest.map((r,i)=>`
     <div class="region-row">
       <span class="region-name">${r.name}</span>
-      <div class="region-bar"><div class="region-fill" style="width:${r.val}%"></div></div>
+      <div class="region-bar"><div class="region-fill" style="width:${r.val}%;animation-delay:${i*70}ms"></div></div>
       <span class="region-val">${r.val}</span>
     </div>`).join("");
   return `
     <div class="spot">
+      <svg class="spot-icon" viewBox="0 0 64 44">
+        <rect x="4" y="20" width="12" height="24" rx="1"/>
+        <rect x="20" y="8" width="12" height="36" rx="1"/>
+        <rect x="36" y="15" width="12" height="29" rx="1"/>
+        <rect x="52" y="24" width="8" height="20" rx="1"/>
+        <rect class="win" x="24" y="15" width="4" height="4" style="animation-delay:0s"/>
+        <rect class="win" x="24" y="23" width="4" height="4" style="animation-delay:.5s"/>
+        <rect class="win" x="8" y="26" width="4" height="4" style="animation-delay:1.1s"/>
+        <rect class="win" x="40" y="21" width="4" height="4" style="animation-delay:1.7s"/>
+      </svg>
       <div class="spot-num">${top.name}</div>
-      <div class="spot-sub">índice de interesse ${top.val}/100 · ${peak}</div>
+      <div class="spot-sub">índice de interesse ${top.val}/100 · ${note}</div>
     </div>
     ${bars}`;
 }
 
-/* buscas relacionadas: rising queries do Google Trends */
-function relatedChips(related){
-  return related.map(r=>`<span class="rel${r.breakout?" breakout":""}">${r.breakout?"▲ ":""}${r.q}</span>`).join("");
+/* também em alta hoje (demais tendências reais do dia) */
+function alsoChips(top){
+  return top.slice(1).map(r=>`<span class="rel breakout">▲ ${r.name} · ${r.traffic}</span>`).join("");
 }
 
-/* comparação com termos similares */
-function compareBlock(list){
-  return list.map(r=>`
+/* ranking real de hoje (tráfego relativo ao líder) */
+function rankBlock(top){
+  const max=top[0].val;
+  return top.map((r,i)=>`
     <div class="region-row">
-      <span class="region-name">${r.name}</span>
-      <div class="region-bar"><div class="region-fill" style="width:${r.val}%"></div></div>
-      <span class="region-val">${r.val}</span>
+      <span class="region-name">${i+1}. ${r.name}</span>
+      <div class="region-bar"><div class="region-fill" style="width:${r.val/max*100}%;animation-delay:${i*70}ms"></div></div>
+      <span class="region-val">${r.traffic}</span>
     </div>`).join("");
+}
+
+/* participação no tráfego de hoje (donut real) */
+function shareDonut(top){
+  const C=213.6, r=34;
+  const total=top.reduce((s,x)=>s+x.val,0);
+  const colors=["var(--signal)","var(--go)","rgba(46,232,138,.45)","rgba(200,255,94,.35)","rgba(244,239,228,.22)"];
+  let offset=0, circles="";
+  top.forEach((x,i)=>{
+    const frac=x.val/total;
+    circles+=`<circle class="seg" cx="48" cy="48" r="${r}" stroke="${colors[i]}"
+      stroke-dasharray="${C*frac} ${C}" stroke-dashoffset="${-offset}"/>`;
+    offset+=C*frac;
+  });
+  const lead=Math.round(top[0].val/total*100);
+  return `
+    <div class="donut-wrap">
+      <div class="donut">
+        <svg width="96" height="96">${circles}</svg>
+        <div class="donut-center"><b>${lead}%</b><span>líder</span></div>
+      </div>
+      <div class="device-legend">
+        ${top.slice(0,3).map((x,i)=>`<span><i class="sw" style="background:${colors[i]}"></i>${x.name} <b>${Math.round(x.val/total*100)}%</b></span>`).join("")}
+      </div>
+    </div>`;
 }
 
 /* notícias relacionadas (com link para a matéria; sem url, cai na busca do Google) */
@@ -490,38 +497,6 @@ function newsBlock(news){
       <div class="news-meta">${n.source}<span class="dotsep">·</span>${n.time}</div>
     </a>`;
   }).join("");
-}
-
-/* sazonalidade dos últimos 12 meses (mês de pico destacado) */
-function seasonBlock(season){
-  const max=Math.max(...season);
-  const months=["J","F","M","A","M","J","J","A","S","O","N","D"];
-  return `<div class="season-chart">${season.map((v,i)=>`
-    <div class="season-col${v===max?" max":""}"><div class="season-bar" style="height:${v/max*100}%;animation-delay:${i*45}ms"></div><span class="season-lbl">${months[i]}</span></div>`).join("")}</div>`;
-}
-
-/* split de dispositivos — donut chart */
-function deviceBlock(d){
-  const C=213.6, r=34;
-  const segs=[["mobile",d.mobile,"var(--signal)"],["desktop",d.desktop,"var(--go)"],["tablet",d.tablet,"rgba(244,239,228,.25)"]];
-  let offset=0, circles="";
-  segs.forEach(([k,v,color])=>{
-    circles+=`<circle class="seg" cx="48" cy="48" r="${r}" stroke="${color}"
-      stroke-dasharray="${C*v/100} ${C}" stroke-dashoffset="${-offset}"/>`;
-    offset+=C*v/100;
-  });
-  return `
-    <div class="donut-wrap">
-      <div class="donut">
-        <svg width="96" height="96">${circles}</svg>
-        <div class="donut-center"><b>${d.mobile}%</b><span>mobile</span></div>
-      </div>
-      <div class="device-legend">
-        <span><i class="sw mobile"></i>Mobile <b>${d.mobile}%</b></span>
-        <span><i class="sw desktop"></i>Desktop <b>${d.desktop}%</b></span>
-        <span><i class="sw tablet"></i>Tablet <b>${d.tablet}%</b></span>
-      </div>
-    </div>`;
 }
 
 /* render */
@@ -539,7 +514,6 @@ function render(){
   }
   const i=c.trends.length-1;
   const t=c.trends[i];
-  const growthPct = t.chart[t.chart.length-1] && t.chart[0] ? Math.round((t.chart[t.chart.length-1]/t.chart[0]-1)*100) : 0;
 
   layout.innerHTML = `
       <div class="a-main">
@@ -569,7 +543,7 @@ function render(){
         </div>
       </div>
 
-      <div class="section a-regions"><h3>Onde mais buscam</h3><div class="fill">${regionBlock(t.regions,t.peak)}</div></div>
+      <div class="section a-regions"><h3>Onde mais buscam</h3><div class="fill">${regionBlock(t.regions,t.regionNote)}</div></div>
 
       <div class="section a-why"><h3>Por que explodiu</h3><div class="fill"><p>${t.why}</p></div></div>
 
@@ -577,21 +551,15 @@ function render(){
         <div class="fill"><div class="ops">${t.ops.map(o=>`<span class="op">${o}</span>`).join("")}</div></div>
       </div>
 
-      <div class="section a-related"><h3>Perguntas em alta</h3>
-        <div class="fill"><div class="ops">${relatedChips(t.related)}</div></div>
+      <div class="section a-related"><h3>Também em alta hoje</h3>
+        <div class="fill"><div class="ops">${alsoChips(t.topToday)}</div></div>
       </div>
 
       <div class="section a-news"><h3>Notícias relacionadas</h3><div class="fill">${newsBlock(t.news)}</div></div>
 
-      <div class="section a-devices"><h3>Como buscam</h3><div class="fill">${deviceBlock(t.devices)}</div></div>
+      <div class="section a-share"><h3>Fatia do tráfego hoje</h3><div class="fill">${shareDonut(t.topToday)}</div></div>
 
-      <div class="section a-compare"><h3>vs. termos similares</h3><div class="fill">${compareBlock(t.compare)}</div></div>
-
-      <div class="section a-season"><h3>Sazonalidade</h3><div class="fill">${seasonBlock(t.season)}</div></div>
-
-      <div class="section a-spark"><h3>Últimos 10 dias</h3><div class="fill">${spark(t.chart)}
-        <div class="spark-meta"><span>10 dias atrás</span><b>+${growthPct}% no período</b></div></div>
-      </div>`;
+      <div class="section a-rank"><h3>Ranking de buscas · Brasil · hoje</h3><div class="fill">${rankBlock(t.topToday)}</div></div>`;
 }
 
 /* push permission (demo local — em produção: Firebase Cloud Messaging) */
