@@ -7,7 +7,7 @@
 <title>TrendPulse — A oportunidade do dia</title>
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600;1,9..144,900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0b0a08;
@@ -16,8 +16,8 @@
   --line:rgba(244,239,228,.16);
   --line-soft:rgba(244,239,228,.08);
   --card:rgba(244,239,228,.035);
-  --signal:#ff5720;
-  --signal-soft:rgba(255,87,32,.13);
+  --signal:#2ee88a;
+  --signal-soft:rgba(46,232,138,.13);
   --go:#c8ff5e;
   --go-soft:rgba(200,255,94,.1);
   --radius:6px;
@@ -28,6 +28,7 @@ body{
   background:var(--bg);
   color:var(--ink);
   font-family:'JetBrains Mono',monospace;
+  overflow:hidden;
 }
 /* grain overlay for texture */
 .grain{
@@ -36,15 +37,48 @@ body{
 }
 body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(900px 500px at 50% -8%, rgba(255,87,32,.10), transparent 60%);
+  background:radial-gradient(900px 500px at 50% -8%, rgba(46,232,138,.10), transparent 60%);
 }
 /* ---------- PAGE ---------- */
-.phone{
-  width:100%;max-width:480px;min-height:100dvh;margin:0 auto;
+.shell{
+  width:100%;max-width:1440px;height:100dvh;margin:0 auto;
   position:relative;z-index:1;display:flex;flex-direction:column;
   animation:pop .6s cubic-bezier(.2,.9,.3,1) both;
+  padding:0 26px;
 }
 @keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* ---------- BENTO GRID ---------- */
+.layout{
+  flex:1;min-height:0;
+  display:grid;gap:12px;padding:14px 0 18px;
+  grid-template-columns:1.2fr 1fr 1fr 1fr;
+  grid-template-rows:repeat(4,minmax(0,1fr));
+  grid-template-areas:
+    "hero    regions why     why"
+    "hero    regions money   news"
+    "score   related devices news"
+    "cta     compare season  spark";
+}
+.layout>*{min-width:0;min-height:0}
+.a-hero{grid-area:hero}
+.a-score{grid-area:score}
+.a-cta{grid-area:cta}
+.a-regions{grid-area:regions}
+.a-related{grid-area:related}
+.a-why{grid-area:why}
+.a-money{grid-area:money}
+.a-news{grid-area:news}
+.a-devices{grid-area:devices}
+.a-compare{grid-area:compare}
+.a-season{grid-area:season}
+.a-spark{grid-area:spark}
+.wide{grid-column:1/-1;grid-row:1/-1}
+.cta-box{display:flex;flex-direction:column;justify-content:center;gap:12px}
+@media (max-width:1180px){
+  body{overflow:auto}
+  .shell{height:auto;min-height:100dvh}
+  .layout{display:flex;flex-direction:column;padding:14px 0 24px}
+}
 /* ---------- HEADER BACKGROUND ---------- */
 .phone-bg{
   position:fixed;top:0;left:0;width:100%;height:460px;z-index:0;
@@ -59,117 +93,181 @@ body::before{
     rgba(11,10,8,.94) 85%,
     var(--bg) 100%);
 }
-/* ---------- TOP ---------- */
+/* ---------- TOP (masthead) ---------- */
 .top{
-  position:relative;z-index:1;
-  padding:26px 22px 10px;
+  position:relative;z-index:1;flex:0 0 auto;
+  padding:18px 0 0;text-align:center;
 }
 .logo{
-  display:flex;align-items:baseline;gap:10px;
-  font-family:'Fraunces';font-style:italic;font-weight:900;font-size:26px;letter-spacing:-.01em;
+  display:flex;align-items:center;justify-content:center;gap:10px;
 }
-.logo span{color:var(--signal)}
-.logo .dot{position:relative;top:-2px}
-.tagline{
-  margin-top:5px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
-}
+.logo-img{height:34px;width:auto;display:block}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--go);box-shadow:0 0 0 3px var(--go-soft);animation:pulse 1.6s infinite;flex:0 0 auto}
 @keyframes pulse{50%{opacity:.3}}
+.rule{
+  margin:18px 0 0;height:1px;
+  background:linear-gradient(to right, transparent, var(--line) 15%, var(--line) 85%, transparent);
+}
 .date{
-  position:relative;z-index:1;padding:2px 22px 16px;font-size:12px;color:var(--muted);
+  position:relative;z-index:1;flex:0 0 auto;padding:8px 0 0;font-size:11px;color:var(--muted);
+  text-align:center;letter-spacing:.02em;
 }
 .date b{color:var(--ink);font-weight:600}
 /* ---------- COUNTRY TABS ---------- */
 .tabs{
-  position:relative;z-index:1;
-  display:flex;gap:0;padding:0 22px 18px;overflow-x:auto;scrollbar-width:none;
-  margin-top:118px;border-bottom:1px solid var(--line-soft);
+  position:relative;z-index:1;flex:0 0 auto;
+  display:flex;justify-content:center;gap:8px;padding:10px 0 14px;overflow-x:auto;scrollbar-width:none;
+  border-bottom:1px solid var(--line-soft);
 }
 .tabs::-webkit-scrollbar{display:none}
 .tab{
-  flex:0 0 auto;padding:8px 14px 12px;font-size:11px;letter-spacing:.08em;
-  border:none;border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;
-  background:transparent;font-family:'JetBrains Mono';font-weight:500;transition:.2s;white-space:nowrap;
+  flex:0 0 auto;padding:9px 15px;font-size:11px;letter-spacing:.06em;
+  border:1px solid var(--line);border-radius:3px;color:var(--muted);cursor:pointer;
+  background:rgba(244,239,228,.02);font-family:'JetBrains Mono';font-weight:500;transition:.2s;white-space:nowrap;
   text-transform:uppercase;
 }
-.tab.active{color:var(--ink);border-bottom-color:var(--signal);font-weight:700}
+.tab.active{background:var(--signal);border-color:var(--signal);color:#0b0a08;font-weight:700}
 .tab.soon{opacity:.4}
-/* ---------- FEED ---------- */
-.feed{position:relative;z-index:1;padding:0 16px}
-.trend{display:flex;flex-direction:column;gap:14px;padding:20px 6px 28px}
 /* hero / dossier card */
 .hero-card{
   background:linear-gradient(180deg, rgba(244,239,228,.06), rgba(244,239,228,.02));
-  border:1px solid var(--line);border-top:3px solid var(--signal);
+  border:1px solid var(--line);
   border-radius:var(--radius);
-  min-height:250px;padding:26px 22px 24px;
+  padding:26px 22px;
   position:relative;overflow:hidden;
-  display:flex;flex-direction:column;justify-content:flex-end;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
 }
-.hero-card::before,.hero-card::after{
-  content:"";position:absolute;width:14px;height:14px;
-  border-top:1px solid var(--signal);pointer-events:none;
-}
-.hero-card::before{top:10px;left:10px;border-left:1px solid var(--signal)}
-.hero-card::after{top:10px;right:10px;border-right:1px solid var(--signal)}
 .hero-card>*{position:relative;z-index:1}
 .rank{
   font-size:10.5px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;
-  margin-bottom:16px;display:flex;align-items:center;gap:8px;
+  margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:8px;
 }
 .rank::before{content:"";width:16px;height:1px;background:var(--signal)}
 .kw{
-  font-family:'Fraunces';font-style:italic;font-weight:900;font-size:38px;line-height:1.02;
-  margin-bottom:16px;letter-spacing:-.01em;color:var(--ink);
+  font-family:'Archivo Black';font-weight:400;font-size:32px;line-height:1.08;
+  margin-bottom:16px;letter-spacing:-.01em;color:var(--ink);text-transform:uppercase;
 }
 .growth{
-  display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+  display:inline-flex;align-items:center;gap:7px;align-self:center;
   background:var(--go-soft);color:var(--go);
   border:1px dashed rgba(200,255,94,.4);
   padding:7px 14px;border-radius:3px;font-weight:700;font-size:13px;letter-spacing:.04em;
-  transform:rotate(-1.5deg);
 }
 /* score */
-.score-row{display:flex;gap:10px}
+.score-row{display:flex;gap:10px;min-height:0}
 .score-card,.mini{
   background:var(--card);border:1px solid var(--line-soft);
-  border-radius:var(--radius);padding:18px;
+  border-radius:var(--radius);padding:16px;
 }
-.score-card{flex:1;display:flex;align-items:center;gap:14px;min-width:0}
+.score-card{flex:1.2;display:flex;align-items:center;justify-content:center;gap:14px;min-width:0}
 .score-card>div{min-width:0}
-.ring{position:relative;width:74px;height:74px;flex:0 0 auto}
+.ring{position:relative;width:82px;height:82px;flex:0 0 auto}
 .ring svg{transform:rotate(-90deg)}
-.ring circle{fill:none;stroke-width:5;stroke-linecap:round}
+.ring circle{fill:none;stroke-width:6;stroke-linecap:round}
 .ring .bgc{stroke:var(--line-soft)}
-.ring .fgc{stroke:var(--signal);stroke-dasharray:207;transition:stroke-dashoffset 1s ease}
+.ring .fgc{
+  stroke:var(--signal);stroke-dasharray:226;transition:stroke-dashoffset 1s ease;
+  filter:drop-shadow(0 0 6px rgba(46,232,138,.55));
+}
 .ring b{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:'JetBrains Mono';font-size:18px;font-weight:700;
+  font-family:'JetBrains Mono';font-size:20px;font-weight:700;
 }
-.label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;white-space:nowrap}
+.label{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;white-space:nowrap}
 .val{font-weight:600;font-size:14px;font-family:'JetBrains Mono'}
 .mini{flex:1;display:flex;flex-direction:column;justify-content:center}
 /* sections */
 .section{
   background:var(--card);border:1px solid var(--line-soft);
-  border-radius:var(--radius);padding:20px 20px 22px;
+  border-radius:var(--radius);padding:16px 18px;
+  display:flex;flex-direction:column;overflow:hidden;
+  transition:border-color .25s;
 }
+.section:hover{border-color:var(--line)}
 .section h3{
   font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--signal);font-weight:700;margin-bottom:12px;
+  color:var(--signal);font-weight:700;margin-bottom:12px;flex:0 0 auto;
   display:flex;align-items:center;gap:8px;
 }
 .section h3::before{content:"◆";font-size:8px}
-.section p{font-size:13.5px;line-height:1.7;color:#d6d1c4;font-weight:400;font-family:'JetBrains Mono'}
+.section .fill{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
+.section p{font-size:12.5px;line-height:1.7;color:#d6d1c4;font-weight:400;font-family:'JetBrains Mono'}
 .ops{display:flex;flex-wrap:wrap;gap:8px}
 .op{
   font-size:12px;padding:8px 13px;border-radius:3px;
   background:transparent;color:var(--ink);border:1px dashed var(--line);
   font-family:'JetBrains Mono';
 }
-.spark{width:100%;height:52px;margin-top:6px}
-.spark polyline{fill:none;stroke:var(--signal);stroke-width:2;stroke-linecap:round}
+/* spotlight (estilo Apple keynote: número gigante + legenda pequena) */
+.spot{text-align:center;padding:6px 0 22px}
+.spot-num{
+  font-family:'Archivo Black';font-weight:400;font-size:27px;line-height:1.1;
+  text-transform:uppercase;color:var(--ink);
+}
+.spot-sub{margin-top:8px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+/* regiões */
+.region-row{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.region-row:last-child{margin-bottom:0}
+.region-name{width:118px;flex:0 0 auto;font-size:11.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region-bar{flex:1;height:8px;border-radius:4px;background:var(--line-soft);overflow:hidden}
+.region-fill{
+  height:100%;border-radius:4px;
+  background:linear-gradient(90deg, rgba(46,232,138,.45), var(--signal));
+  box-shadow:0 0 10px rgba(46,232,138,.35);
+  animation:growW .9s cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes growW{from{width:0}}
+.region-val{width:30px;flex:0 0 auto;text-align:right;font-size:12px;font-weight:700;color:var(--go)}
+/* related queries */
+.rel{
+  font-size:12px;padding:8px 13px;border-radius:3px;
+  background:transparent;color:var(--muted);border:1px dashed var(--line);
+  font-family:'JetBrains Mono';
+}
+.rel.breakout{color:var(--go);border-color:rgba(200,255,94,.4);background:var(--go-soft)}
+/* devices — donut */
+.donut-wrap{display:flex;align-items:center;justify-content:center;gap:18px}
+.donut{position:relative;width:96px;height:96px;flex:0 0 auto}
+.donut svg{transform:rotate(-90deg)}
+.donut circle{fill:none;stroke-width:11;stroke-linecap:butt}
+.donut .seg{transition:stroke-dashoffset 1s ease}
+.donut-center{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.donut-center b{font-size:17px;font-family:'JetBrains Mono'}
+.donut-center span{font-size:8.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.device-legend{display:flex;flex-direction:column;gap:9px;font-size:11.5px;color:var(--muted)}
+.device-legend b{color:var(--ink);font-family:'JetBrains Mono'}
+.sw{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:7px}
+.sw.mobile{background:var(--signal)}
+.sw.desktop{background:var(--go)}
+.sw.tablet{background:var(--line)}
+/* notícias relacionadas */
+.news-item{padding:10px 0;border-bottom:1px dashed var(--line-soft)}
+.news-item:first-child{padding-top:0}
+.news-item:last-child{border-bottom:none;padding-bottom:0}
+.news-title{font-size:12.5px;color:var(--ink);line-height:1.5;margin-bottom:6px}
+.news-meta{font-size:10px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.news-meta .dotsep{margin:0 6px}
+/* sazonalidade */
+.season-chart{display:flex;align-items:flex-end;gap:5px;flex:1;min-height:70px}
+.season-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:5px}
+.season-bar{
+  width:100%;border-radius:2px 2px 0 0;min-height:3px;
+  background:linear-gradient(to top, rgba(46,232,138,.25), rgba(46,232,138,.8));
+  animation:growH .9s cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes growH{from{height:0}}
+.season-col.max .season-bar{background:linear-gradient(to top, var(--go), #eaff9a);box-shadow:0 0 14px rgba(200,255,94,.4)}
+.season-col.max .season-lbl{color:var(--go);font-weight:700}
+.season-lbl{font-size:9px;color:var(--muted)}
+/* spark */
+.spark{width:100%;flex:1;min-height:64px}
+.spark polyline{fill:none;stroke:var(--signal);stroke-width:2.5;stroke-linecap:round;filter:drop-shadow(0 0 5px rgba(46,232,138,.6))}
 .spark .area{fill:url(#g);stroke:none}
+.spark .enddot{fill:var(--go);animation:pulse 1.6s infinite}
+.spark-meta{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:6px;flex:0 0 auto}
+.spark-meta b{color:var(--go)}
 /* timeline */
 .timeline{display:flex;justify-content:center;padding-top:4px}
 .tl-track{display:flex;align-items:center;gap:8px;max-width:100%;overflow-x:auto;scrollbar-width:none;padding:2px}
@@ -180,6 +278,8 @@ body::before{
 .tl-label{font-size:10px;color:var(--muted);letter-spacing:.02em;white-space:nowrap;max-width:76px;overflow:hidden;text-overflow:ellipsis}
 .tl-item.current .tl-label{color:var(--ink);font-weight:700;font-size:11px}
 .tl-line{width:20px;height:1px;background:var(--line-soft);flex:0 0 auto}
+.tl-item.next.locked{opacity:.35;pointer-events:none;cursor:not-allowed}
+.tl-item.next.locked .tl-label::before{content:"🔒 ";font-size:9px}
 /* push CTA */
 .push{
   margin:0;width:100%;
@@ -206,16 +306,15 @@ body::before{
 <div class="grain"></div>
 <div class="phone-bg" id="phoneBg"></div>
 
-<div class="phone">
+<div class="shell">
   <div class="top">
-    <div class="logo">Trend<span>Pulse</span><span class="dot"></span></div>
-    <div class="tagline">A oportunidade do dia</div>
+    <div class="logo"><img src="images/logo.png" alt="TrendPulse" class="logo-img"><span class="dot"></span></div>
   </div>
   <div class="date" id="date"></div>
 
   <div class="tabs" id="tabs"></div>
 
-  <div class="feed" id="feed"></div>
+  <div class="layout" id="layout"></div>
 
   <div class="toast" id="toast"></div>
 </div>
@@ -232,15 +331,36 @@ const DATA = {
       {kw:"PIX Parcelado", growth:"+870%", score:96, vol:"1,2M buscas", comp:"Média",
        img:"", why:"Novas regras do Banco Central liberaram o parcelamento via Pix, e bancos correram para anunciar o recurso. Milhares de pessoas buscam como funciona, taxas e quais bancos já oferecem.",
        ops:["Comparador de bancos","Canal no YouTube","Landing page SEO","Afiliados fintech","Micro-SaaS financeiro"],
-       chart:[4,5,6,6,8,11,16,26,44,78]},
+       chart:[4,5,6,6,8,11,16,26,44,78],
+       peak:"pico às 12h e 19h",
+       regions:[{name:"São Paulo",val:100},{name:"Rio de Janeiro",val:82},{name:"Minas Gerais",val:71},{name:"Bahia",val:58},{name:"Paraná",val:52}],
+       related:[{q:"como funciona o pix parcelado",breakout:true},{q:"pix parcelado quais bancos",breakout:true},{q:"pix parcelado taxa de juros",breakout:false},{q:"pix parcelado nubank",breakout:false},{q:"pix parcelado itaú",breakout:false}],
+       devices:{mobile:81,desktop:16,tablet:3},
+       compare:[{name:"Pix Parcelado",val:100},{name:"Parcelamento sem cartão",val:54},{name:"Crédito consignado",val:38}],
+       news:[{title:"Bancos liberam pix parcelado a partir desta semana",source:"Valor Econômico",time:"3h atrás"},{title:"BC detalha regras do novo pix parcelado",source:"G1",time:"7h atrás"},{title:"Como funciona o pix parcelado passo a passo",source:"UOL",time:"1d atrás"}],
+       season:[22,24,26,28,30,33,38,44,52,63,78,96]},
       {kw:"FGTS Saque", growth:"+310%", score:81, vol:"890K buscas", comp:"Alta",
        img:"", why:"Novo calendário de saque extraordinário anunciado nesta semana movimentou as buscas por datas, valores e quem tem direito.",
        ops:["Conteúdo explicativo","Calculadora online","Newsletter finanças","Afiliados de crédito"],
-       chart:[10,11,10,12,14,13,18,25,31,40]},
+       chart:[10,11,10,12,14,13,18,25,31,40],
+       peak:"pico às 9h",
+       regions:[{name:"Bahia",val:100},{name:"Pernambuco",val:88},{name:"Ceará",val:76},{name:"São Paulo",val:64},{name:"Pará",val:55}],
+       related:[{q:"calendário fgts 2026",breakout:true},{q:"quem tem direito ao saque fgts",breakout:true},{q:"fgts saque aniversário",breakout:false},{q:"consultar fgts caixa",breakout:false}],
+       devices:{mobile:74,desktop:22,tablet:4},
+       compare:[{name:"FGTS Saque",val:100},{name:"Saque-aniversário",val:71},{name:"Auxílio Brasil",val:33}],
+       news:[{title:"Caixa divulga novo calendário de saque do FGTS",source:"G1",time:"5h atrás"},{title:"Quem tem direito ao saque extraordinário do FGTS",source:"Folha",time:"9h atrás"},{title:"Veja como consultar o saldo do FGTS pelo app",source:"UOL",time:"1d atrás"}],
+       season:[40,38,35,33,36,40,45,50,58,66,74,88]},
       {kw:"Agentes de IA", growth:"+240%", score:92, vol:"640K buscas", comp:"Alta",
        img:"", why:"Empresas brasileiras começaram a adotar agentes de IA para atendimento e vendas, puxando buscas por cursos, ferramentas e consultoria.",
        ops:["Consultoria de IA","Curso online","Automação para PMEs","Templates prontos"],
-       chart:[8,9,12,13,15,19,22,27,33,38]}
+       chart:[8,9,12,13,15,19,22,27,33,38],
+       peak:"pico às 21h",
+       regions:[{name:"São Paulo",val:100},{name:"Distrito Federal",val:74},{name:"Santa Catarina",val:66},{name:"Rio Grande do Sul",val:61},{name:"Rio de Janeiro",val:59}],
+       related:[{q:"como criar um agente de ia",breakout:true},{q:"agentes de ia para whatsapp",breakout:true},{q:"curso agentes de ia",breakout:false},{q:"agentes de ia n8n",breakout:false},{q:"agentes de ia grátis",breakout:false}],
+       devices:{mobile:63,desktop:34,tablet:3},
+       compare:[{name:"Agentes de IA",val:100},{name:"ChatGPT",val:88},{name:"Automação RPA",val:41}],
+       news:[{title:"Empresas brasileiras aceleram adoção de agentes de IA",source:"Exame",time:"2h atrás"},{title:"Como criar um agente de IA sem programar",source:"Olhar Digital",time:"6h atrás"},{title:"Mercado de consultoria em IA cresce 3x em 2026",source:"Valor Econômico",time:"1d atrás"}],
+       season:[18,20,22,25,29,34,40,47,55,64,74,92]}
     ]
   },
   us:{name:"🇺🇸 USA", live:false},
@@ -267,10 +387,10 @@ ORDER.forEach(k=>{
 
 /* fundo do topo: usa headerImg do país se houver, senão um gradiente temático */
 const COUNTRY_GRADIENT = {
-  br:"radial-gradient(120% 90% at 50% -10%, rgba(255,87,32,.30), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(200,255,94,.14), transparent 60%), linear-gradient(160deg, #201a12, #0b0a08 80%)",
-  us:"radial-gradient(120% 90% at 50% -10%, rgba(255,87,32,.26), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(244,239,228,.10), transparent 60%), linear-gradient(160deg, #1c1712, #0b0a08 80%)",
-  eu:"radial-gradient(120% 90% at 50% -10%, rgba(255,87,32,.24), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(200,255,94,.12), transparent 60%), linear-gradient(160deg, #1a1611, #0b0a08 80%)",
-  as:"radial-gradient(120% 90% at 50% -10%, rgba(255,87,32,.28), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(244,239,228,.08), transparent 60%), linear-gradient(160deg, #191510, #0b0a08 80%)"
+  br:"radial-gradient(120% 90% at 50% -10%, rgba(46,232,138,.30), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(200,255,94,.14), transparent 60%), linear-gradient(160deg, #201a12, #0b0a08 80%)",
+  us:"radial-gradient(120% 90% at 50% -10%, rgba(46,232,138,.26), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(244,239,228,.10), transparent 60%), linear-gradient(160deg, #1c1712, #0b0a08 80%)",
+  eu:"radial-gradient(120% 90% at 50% -10%, rgba(46,232,138,.24), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(200,255,94,.12), transparent 60%), linear-gradient(160deg, #1a1611, #0b0a08 80%)",
+  as:"radial-gradient(120% 90% at 50% -10%, rgba(46,232,138,.28), transparent 55%), radial-gradient(90% 70% at 90% 30%, rgba(244,239,228,.08), transparent 60%), linear-gradient(160deg, #191510, #0b0a08 80%)"
 };
 function renderHeaderBg(k){
   const c=DATA[k];
@@ -285,48 +405,118 @@ function setCountry(k){
   render();
 }
 
-/* timeline: até 3 tendências já vistas à esquerda + a palavra do dia (atual) em destaque */
+/* timeline: ontem à esquerda, hoje (ativo) no centro, amanhã bloqueado à direita */
 function timeline(trends,i){
-  const past = trends.slice(Math.max(0,i-3), i);
-  const items = past.map(p=>`
-      <div class="tl-item past"><span class="tl-dot"></span><span class="tl-label">${p.kw}</span></div>
-      <span class="tl-line"></span>`).join("");
+  const prev = trends[i-1];
   return `<div class="timeline"><div class="tl-track">
-    ${items}
+    ${prev ? `<div class="tl-item past"><span class="tl-dot"></span><span class="tl-label">${prev.kw}</span></div><span class="tl-line"></span>` : ""}
     <div class="tl-item current"><span class="tl-dot"></span><span class="tl-label">${trends[i].kw}</span></div>
+    <span class="tl-line"></span>
+    <div class="tl-item next locked"><span class="tl-dot"></span><span class="tl-label">Amanhã</span></div>
   </div></div>`;
 }
 
-/* sparkline builder */
+/* sparkline builder (com ponto pulsante no fim) */
 function spark(points){
-  const w=300,h=52,max=Math.max(...points);
+  const w=300,h=64,max=Math.max(...points);
   const step=w/(points.length-1);
-  const pts=points.map((p,i)=>`${i*step},${h-4-(p/max)*(h-10)}`).join(" ");
+  const coords=points.map((p,i)=>[i*step, h-6-(p/max)*(h-14)]);
+  const pts=coords.map(c=>c.join(",")).join(" ");
   const area=`0,${h} ${pts} ${w},${h}`;
+  const [ex,ey]=coords[coords.length-1];
   return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
     <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="rgba(255,87,32,.32)"/><stop offset="1" stop-color="rgba(255,87,32,0)"/>
+      <stop offset="0" stop-color="rgba(46,232,138,.35)"/><stop offset="1" stop-color="rgba(46,232,138,0)"/>
     </linearGradient></defs>
-    <polygon class="area" points="${area}"/><polyline points="${pts}"/></svg>`;
+    <polygon class="area" points="${area}"/><polyline points="${pts}"/>
+    <circle class="enddot" cx="${ex}" cy="${ey}" r="4"/></svg>`;
 }
 
-/* feed render */
+/* regiões: destaque gigante da líder + barras das demais */
+function regionBlock(regions,peak){
+  const [top,...rest]=regions;
+  const bars=rest.map(r=>`
+    <div class="region-row">
+      <span class="region-name">${r.name}</span>
+      <div class="region-bar"><div class="region-fill" style="width:${r.val}%"></div></div>
+      <span class="region-val">${r.val}</span>
+    </div>`).join("");
+  return `
+    <div class="spot">
+      <div class="spot-num">${top.name}</div>
+      <div class="spot-sub">índice de interesse ${top.val}/100 · ${peak}</div>
+    </div>
+    ${bars}`;
+}
+
+/* buscas relacionadas: rising queries do Google Trends */
+function relatedChips(related){
+  return related.map(r=>`<span class="rel${r.breakout?" breakout":""}">${r.breakout?"▲ ":""}${r.q}</span>`).join("");
+}
+
+/* comparação com termos similares */
+function compareBlock(list){
+  return list.map(r=>`
+    <div class="region-row">
+      <span class="region-name">${r.name}</span>
+      <div class="region-bar"><div class="region-fill" style="width:${r.val}%"></div></div>
+      <span class="region-val">${r.val}</span>
+    </div>`).join("");
+}
+
+/* notícias relacionadas */
+function newsBlock(news){
+  return news.map(n=>`
+    <div class="news-item">
+      <div class="news-title">${n.title}</div>
+      <div class="news-meta">${n.source}<span class="dotsep">·</span>${n.time}</div>
+    </div>`).join("");
+}
+
+/* sazonalidade dos últimos 12 meses */
+function seasonBlock(season){
+  const max=Math.max(...season);
+  const months=["J","F","M","A","M","J","J","A","S","O","N","D"];
+  return `<div class="season-chart">${season.map((v,i)=>`
+    <div class="season-col"><div class="season-bar" style="height:${v/max*100}%"></div><span class="season-lbl">${months[i]}</span></div>`).join("")}</div>`;
+}
+
+/* split de dispositivos */
+function deviceBlock(d){
+  return `
+    <div class="device-bar">
+      <div class="device-seg mobile" style="width:${d.mobile}%"></div>
+      <div class="device-seg desktop" style="width:${d.desktop}%"></div>
+      <div class="device-seg tablet" style="width:${d.tablet}%"></div>
+    </div>
+    <div class="device-legend">
+      <span><i class="sw mobile"></i>Mobile <b>${d.mobile}%</b></span>
+      <span><i class="sw desktop"></i>Desktop <b>${d.desktop}%</b></span>
+      <span><i class="sw tablet"></i>Tablet <b>${d.tablet}%</b></span>
+    </div>`;
+}
+
+/* render */
 function render(){
-  const feed=document.getElementById("feed");
+  const colMain=document.getElementById("colMain");
+  const colSide=document.getElementById("colSide");
+  const colExtra=document.getElementById("colExtra");
   const c=DATA[current];
   if(!c.live){
-    feed.innerHTML=`<div class="trend"><div class="hero-card" style="text-align:center;padding:60px 24px;align-items:center">
+    colMain.innerHTML=`<div class="hero-card" style="text-align:center;padding:60px 24px;align-items:center">
       <div class="rank" style="justify-content:center">${c.name}</div>
       <div class="kw" style="font-size:26px">Em breve.</div>
       <p style="color:var(--muted);font-size:13px;line-height:1.7;font-family:'JetBrains Mono'">Estamos começando pelo Brasil.<br>Ative os alertas para saber quando ${c.name.slice(5)} entrar no ar.</p>
       <br><button class="push" onclick="askPush()">Ativar alertas</button>
-    </div></div>`;
+    </div>`;
+    colSide.innerHTML="";
+    colExtra.innerHTML="";
     return;
   }
   const i=c.trends.length-1;
   const t=c.trends[i];
-  feed.innerHTML = `
-    <div class="trend">
+
+  colMain.innerHTML = `
       <div class="hero-card">
         <div class="rank">Tendência do dia · ${c.name}</div>
         <div class="kw">${t.kw}</div>
@@ -346,17 +536,32 @@ function render(){
         <div class="label" style="margin-top:10px">Concorrência</div><div class="val">${t.comp}</div></div>
       </div>
 
+      <button class="push" id="pushBtn" onclick="askPush()">Receber a oportunidade de amanhã</button>
+      ${timeline(c.trends,i)}`;
+
+  colSide.innerHTML = `
+      <div class="section">${regionBlock(t.regions,t.peak)}</div>
+
       <div class="section"><h3>Por que explodiu</h3><p>${t.why}</p></div>
 
       <div class="section"><h3>Como ganhar dinheiro</h3>
         <div class="ops">${t.ops.map(o=>`<span class="op">${o}</span>`).join("")}</div>
       </div>
 
-      <div class="section"><h3>Últimos 10 dias</h3>${spark(t.chart)}</div>
+      <div class="section"><h3>Perguntas relacionadas</h3>
+        <div class="ops">${relatedChips(t.related)}</div>
+      </div>`;
 
-      <button class="push" id="pushBtn" onclick="askPush()">Receber a oportunidade de amanhã</button>
-      ${timeline(c.trends,i)}
-    </div>`;
+  colExtra.innerHTML = `
+      <div class="section"><h3>Como as pessoas buscam</h3>${deviceBlock(t.devices)}</div>
+
+      <div class="section"><h3>Comparado a termos similares</h3>${compareBlock(t.compare)}</div>
+
+      <div class="section"><h3>Notícias relacionadas</h3>${newsBlock(t.news)}</div>
+
+      <div class="section"><h3>Sazonalidade (12 meses)</h3>${seasonBlock(t.season)}</div>
+
+      <div class="section"><h3>Últimos 10 dias</h3>${spark(t.chart)}</div>`;
 }
 
 /* push permission (demo local — em produção: Firebase Cloud Messaging) */
