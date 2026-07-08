@@ -54,15 +54,14 @@ body::before{
   grid-template-columns:1.2fr 1fr 1fr 1fr;
   grid-template-rows:repeat(4,minmax(0,1fr));
   grid-template-areas:
-    "hero    regions why     why"
-    "hero    regions money   news"
-    "score   related devices news"
-    "cta     compare season  spark";
+    "main    regions why     why"
+    "main    regions money   news"
+    "main    related devices news"
+    "main    compare season  spark";
 }
 .layout>*{min-width:0;min-height:0}
-.a-hero{grid-area:hero}
-.a-score{grid-area:score}
-.a-cta{grid-area:cta}
+.a-main{grid-area:main;display:flex;flex-direction:column;gap:12px;min-height:0}
+.a-main .hero-card{flex:1;min-height:0}
 .a-regions{grid-area:regions}
 .a-related{grid-area:related}
 .a-why{grid-area:why}
@@ -192,19 +191,19 @@ body::before{
 .section h3::before{content:"◆";font-size:8px}
 .section .fill{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
 .section p{font-size:12.5px;line-height:1.7;color:#d6d1c4;font-weight:400;font-family:'JetBrains Mono'}
-.ops{display:flex;flex-wrap:wrap;gap:8px}
+.ops{display:flex;flex-wrap:wrap;gap:7px}
 .op{
-  font-size:12px;padding:8px 13px;border-radius:3px;
+  font-size:11px;padding:6px 10px;border-radius:3px;
   background:transparent;color:var(--ink);border:1px dashed var(--line);
   font-family:'JetBrains Mono';
 }
 /* spotlight (estilo Apple keynote: número gigante + legenda pequena) */
-.spot{text-align:center;padding:6px 0 22px}
+.spot{text-align:center;padding:4px 0 18px}
 .spot-num{
-  font-family:'Archivo Black';font-weight:400;font-size:27px;line-height:1.1;
+  font-family:'Archivo Black';font-weight:400;font-size:24px;line-height:1.1;
   text-transform:uppercase;color:var(--ink);
 }
-.spot-sub{margin-top:8px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.spot-sub{margin-top:7px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 /* regiões */
 .region-row{display:flex;align-items:center;gap:10px;margin-bottom:11px}
 .region-row:last-child{margin-bottom:0}
@@ -220,7 +219,7 @@ body::before{
 .region-val{width:30px;flex:0 0 auto;text-align:right;font-size:12px;font-weight:700;color:var(--go)}
 /* related queries */
 .rel{
-  font-size:12px;padding:8px 13px;border-radius:3px;
+  font-size:11px;padding:6px 10px;border-radius:3px;
   background:transparent;color:var(--muted);border:1px dashed var(--line);
   font-family:'JetBrains Mono';
 }
@@ -360,7 +359,18 @@ const DATA = {
        devices:{mobile:63,desktop:34,tablet:3},
        compare:[{name:"Agentes de IA",val:100},{name:"ChatGPT",val:88},{name:"Automação RPA",val:41}],
        news:[{title:"Empresas brasileiras aceleram adoção de agentes de IA",source:"Exame",time:"2h atrás"},{title:"Como criar um agente de IA sem programar",source:"Olhar Digital",time:"6h atrás"},{title:"Mercado de consultoria em IA cresce 3x em 2026",source:"Valor Econômico",time:"1d atrás"}],
-       season:[18,20,22,25,29,34,40,47,55,64,74,92]}
+       season:[18,20,22,25,29,34,40,47,55,64,74,92]},
+      {kw:"Drex", growth:"+680%", score:95, vol:"1,4M buscas", comp:"Baixa",
+       img:"", why:"O Banco Central anunciou a fase aberta ao público do Drex, o real digital. Milhões de pessoas buscam o que é, como vai funcionar no dia a dia e o que muda em relação ao Pix.",
+       ops:["Conteúdo explicativo","Curso de finanças digitais","Newsletter especializada","Canal no YouTube","Consultoria para empresas"],
+       chart:[3,4,4,5,7,10,15,24,41,72],
+       peak:"pico às 8h e 20h",
+       regions:[{name:"São Paulo",val:100},{name:"Distrito Federal",val:86},{name:"Rio de Janeiro",val:79},{name:"Minas Gerais",val:63},{name:"Paraná",val:57}],
+       related:[{q:"o que é drex",breakout:true},{q:"drex é diferente do pix",breakout:true},{q:"como usar o drex",breakout:true},{q:"drex banco central",breakout:false},{q:"drex vale a pena",breakout:false}],
+       devices:{mobile:77,desktop:20,tablet:3},
+       compare:[{name:"Drex",val:100},{name:"Pix",val:64},{name:"Bitcoin",val:48}],
+       news:[{title:"BC libera Drex para o público em fase inicial",source:"Valor Econômico",time:"1h atrás"},{title:"Drex x Pix: entenda a diferença na prática",source:"G1",time:"4h atrás"},{title:"Bancos preparam carteiras digitais para o Drex",source:"InfoMoney",time:"9h atrás"}],
+       season:[5,6,7,8,10,13,17,24,33,45,60,88]}
     ]
   },
   us:{name:"🇺🇸 USA", live:false},
@@ -473,61 +483,67 @@ function newsBlock(news){
     </div>`).join("");
 }
 
-/* sazonalidade dos últimos 12 meses */
+/* sazonalidade dos últimos 12 meses (mês de pico destacado) */
 function seasonBlock(season){
   const max=Math.max(...season);
   const months=["J","F","M","A","M","J","J","A","S","O","N","D"];
   return `<div class="season-chart">${season.map((v,i)=>`
-    <div class="season-col"><div class="season-bar" style="height:${v/max*100}%"></div><span class="season-lbl">${months[i]}</span></div>`).join("")}</div>`;
+    <div class="season-col${v===max?" max":""}"><div class="season-bar" style="height:${v/max*100}%;animation-delay:${i*45}ms"></div><span class="season-lbl">${months[i]}</span></div>`).join("")}</div>`;
 }
 
-/* split de dispositivos */
+/* split de dispositivos — donut chart */
 function deviceBlock(d){
+  const C=213.6, r=34;
+  const segs=[["mobile",d.mobile,"var(--signal)"],["desktop",d.desktop,"var(--go)"],["tablet",d.tablet,"rgba(244,239,228,.25)"]];
+  let offset=0, circles="";
+  segs.forEach(([k,v,color])=>{
+    circles+=`<circle class="seg" cx="48" cy="48" r="${r}" stroke="${color}"
+      stroke-dasharray="${C*v/100} ${C}" stroke-dashoffset="${-offset}"/>`;
+    offset+=C*v/100;
+  });
   return `
-    <div class="device-bar">
-      <div class="device-seg mobile" style="width:${d.mobile}%"></div>
-      <div class="device-seg desktop" style="width:${d.desktop}%"></div>
-      <div class="device-seg tablet" style="width:${d.tablet}%"></div>
-    </div>
-    <div class="device-legend">
-      <span><i class="sw mobile"></i>Mobile <b>${d.mobile}%</b></span>
-      <span><i class="sw desktop"></i>Desktop <b>${d.desktop}%</b></span>
-      <span><i class="sw tablet"></i>Tablet <b>${d.tablet}%</b></span>
+    <div class="donut-wrap">
+      <div class="donut">
+        <svg width="96" height="96">${circles}</svg>
+        <div class="donut-center"><b>${d.mobile}%</b><span>mobile</span></div>
+      </div>
+      <div class="device-legend">
+        <span><i class="sw mobile"></i>Mobile <b>${d.mobile}%</b></span>
+        <span><i class="sw desktop"></i>Desktop <b>${d.desktop}%</b></span>
+        <span><i class="sw tablet"></i>Tablet <b>${d.tablet}%</b></span>
+      </div>
     </div>`;
 }
 
 /* render */
 function render(){
-  const colMain=document.getElementById("colMain");
-  const colSide=document.getElementById("colSide");
-  const colExtra=document.getElementById("colExtra");
+  const layout=document.getElementById("layout");
   const c=DATA[current];
   if(!c.live){
-    colMain.innerHTML=`<div class="hero-card" style="text-align:center;padding:60px 24px;align-items:center">
+    layout.innerHTML=`<div class="hero-card wide" style="padding:60px 24px">
       <div class="rank" style="justify-content:center">${c.name}</div>
       <div class="kw" style="font-size:26px">Em breve.</div>
       <p style="color:var(--muted);font-size:13px;line-height:1.7;font-family:'JetBrains Mono'">Estamos começando pelo Brasil.<br>Ative os alertas para saber quando ${c.name.slice(5)} entrar no ar.</p>
-      <br><button class="push" onclick="askPush()">Ativar alertas</button>
+      <br><button class="push" style="max-width:320px" onclick="askPush()">Ativar alertas</button>
     </div>`;
-    colSide.innerHTML="";
-    colExtra.innerHTML="";
     return;
   }
   const i=c.trends.length-1;
   const t=c.trends[i];
+  const growthPct = t.chart[t.chart.length-1] && t.chart[0] ? Math.round((t.chart[t.chart.length-1]/t.chart[0]-1)*100) : 0;
 
-  colMain.innerHTML = `
-      <div class="hero-card">
+  layout.innerHTML = `
+      <div class="hero-card a-hero">
         <div class="rank">Tendência do dia · ${c.name}</div>
         <div class="kw">${t.kw}</div>
         <span class="growth">▲ ${t.growth} hoje</span>
       </div>
 
-      <div class="score-row">
+      <div class="score-row a-score">
         <div class="score-card">
           <div class="ring">
-            <svg width="74" height="74"><circle class="bgc" cx="37" cy="37" r="33"/>
-            <circle class="fgc" cx="37" cy="37" r="33" style="stroke-dashoffset:${207-207*t.score/100}"/></svg>
+            <svg width="82" height="82"><circle class="bgc" cx="41" cy="41" r="36"/>
+            <circle class="fgc" cx="41" cy="41" r="36" style="stroke-dashoffset:${226-226*t.score/100}"/></svg>
             <b>${t.score}</b>
           </div>
           <div><div class="label">Business Score</div><div class="val">${t.score>=90?"Excepcional":t.score>=80?"Muito alto":"Alto"}</div></div>
@@ -536,32 +552,34 @@ function render(){
         <div class="label" style="margin-top:10px">Concorrência</div><div class="val">${t.comp}</div></div>
       </div>
 
-      <button class="push" id="pushBtn" onclick="askPush()">Receber a oportunidade de amanhã</button>
-      ${timeline(c.trends,i)}`;
-
-  colSide.innerHTML = `
-      <div class="section">${regionBlock(t.regions,t.peak)}</div>
-
-      <div class="section"><h3>Por que explodiu</h3><p>${t.why}</p></div>
-
-      <div class="section"><h3>Como ganhar dinheiro</h3>
-        <div class="ops">${t.ops.map(o=>`<span class="op">${o}</span>`).join("")}</div>
+      <div class="cta-box a-cta">
+        <button class="push" id="pushBtn" onclick="askPush()">Receber a de amanhã</button>
+        ${timeline(c.trends,i)}
       </div>
 
-      <div class="section"><h3>Perguntas relacionadas</h3>
-        <div class="ops">${relatedChips(t.related)}</div>
+      <div class="section a-regions"><h3>Onde mais buscam</h3><div class="fill">${regionBlock(t.regions,t.peak)}</div></div>
+
+      <div class="section a-why"><h3>Por que explodiu</h3><div class="fill"><p>${t.why}</p></div></div>
+
+      <div class="section a-money"><h3>Como ganhar dinheiro</h3>
+        <div class="fill"><div class="ops">${t.ops.map(o=>`<span class="op">${o}</span>`).join("")}</div></div>
+      </div>
+
+      <div class="section a-related"><h3>Perguntas em alta</h3>
+        <div class="fill"><div class="ops">${relatedChips(t.related)}</div></div>
+      </div>
+
+      <div class="section a-news"><h3>Notícias relacionadas</h3><div class="fill">${newsBlock(t.news)}</div></div>
+
+      <div class="section a-devices"><h3>Como buscam</h3><div class="fill">${deviceBlock(t.devices)}</div></div>
+
+      <div class="section a-compare"><h3>vs. termos similares</h3><div class="fill">${compareBlock(t.compare)}</div></div>
+
+      <div class="section a-season"><h3>Sazonalidade</h3><div class="fill">${seasonBlock(t.season)}</div></div>
+
+      <div class="section a-spark"><h3>Últimos 10 dias</h3><div class="fill">${spark(t.chart)}
+        <div class="spark-meta"><span>10 dias atrás</span><b>+${growthPct}% no período</b></div></div>
       </div>`;
-
-  colExtra.innerHTML = `
-      <div class="section"><h3>Como as pessoas buscam</h3>${deviceBlock(t.devices)}</div>
-
-      <div class="section"><h3>Comparado a termos similares</h3>${compareBlock(t.compare)}</div>
-
-      <div class="section"><h3>Notícias relacionadas</h3>${newsBlock(t.news)}</div>
-
-      <div class="section"><h3>Sazonalidade (12 meses)</h3>${seasonBlock(t.season)}</div>
-
-      <div class="section"><h3>Últimos 10 dias</h3>${spark(t.chart)}</div>`;
 }
 
 /* push permission (demo local — em produção: Firebase Cloud Messaging) */
