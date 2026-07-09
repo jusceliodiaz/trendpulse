@@ -341,33 +341,33 @@ body::before{
    DADOS — hoje é manual. Depois, um script busca no Google
    Trends + IA gera resumo/score e grava este mesmo JSON.
 ========================================================= */
-/* Dados REAIS coletados em 08/07/2026:
+/* Dados REAIS coletados em 09/07/2026:
    - ranking e tráfego: RSS oficial trends.google.com/trending/rss?geo=BR
-   - regiões: API interest-by-region do Google Trends
-   - notícias: URLs reais vindas do próprio feed */
+   - epicentro geográfico: local da operação (Bahia), confirmado pelas matérias
+   - notícias: URLs reais vindas do próprio feed / apuração */
 const DATA = {
   br: {
     name:"🇧🇷 Brasil", live:true,
     trends:[
-      {kw:"Feriado 9 de Julho", growth:"5 mil+ buscas", score:72, vol:"5 mil+ buscas", comp:"Baixa",
-       why:"Véspera do feriado da Revolução Constitucionalista (9/7), feriado estadual de São Paulo. As buscas por \"o que abre e o que fecha\", emendas de feriado e programação dispararam no estado inteiro.",
-       ops:["Guia \"abre e fecha\" local","Conteúdo SEO de última hora","Roteiros bate-volta SP","Pautas para portais locais"],
-       regions:[{name:"São Paulo",val:100},{name:"Roraima",val:18},{name:"Sergipe",val:7},{name:"Minas Gerais",val:6},{name:"Mato Grosso do Sul",val:6}],
-       regionNote:"fonte: Google Trends · hoje",
+      {kw:"Fraude no INSS", growth:"5 mil+ buscas", score:78, vol:"5 mil+ buscas", comp:"Baixa",
+       why:"A Polícia Federal e a CGU deflagraram a 2ª fase da Operação Monã, que apura fraudes na concessão de benefícios do INSS a partir de declarações falsas de pertencimento a comunidades indígenas na Bahia (Eunápolis e Porto Seguro). Foram cumpridos 11 mandados de busca e apreensão, dois servidores públicos afastados e bloqueados mais de R$1,5 milhão em contas — prejuízo estimado em mais de R$100 milhões.",
+       ops:["Guia \"como identificar fraude no INSS\"","Conteúdo SEO sobre auditoria previdenciária","Explicativo sobre a Operação Monã","Pauta para portais de direito previdenciário"],
+       regions:[{name:"Bahia",val:100},{name:"Distrito Federal",val:19},{name:"São Paulo",val:12},{name:"Pará",val:9},{name:"Amazonas",val:7}],
+       regionNote:"epicentro: Eunápolis e Porto Seguro (BA)",
        topToday:[
-         {name:"Feriado 9 de julho", traffic:"5 mil+", val:5000},
-         {name:"Petróleo Brent", traffic:"2 mil+", val:2000},
-         {name:"Quem Ama Cuida?", traffic:"2 mil+", val:2000},
-         {name:"Vôlei feminino", traffic:"1 mil+", val:1000},
-         {name:"Angélica", traffic:"1 mil+", val:1000}
+         {name:"Esquema de fraudes no INSS", traffic:"5 mil+", val:5000},
+         {name:"Idoso", traffic:"2 mil+", val:2000},
+         {name:"União Brasil", traffic:"2 mil+", val:2000},
+         {name:"Frio", traffic:"1 mil+", val:1000},
+         {name:"Inglaterra x Noruega", traffic:"500+", val:500}
        ],
        news:[
-         {title:"Veja o que abre e o que fecha no feriado da Revolução Constitucionalista em Ribeirão Preto e Franca",source:"G1",time:"hoje",
-          url:"https://g1.globo.com/sp/ribeirao-preto-franca/noticia/2026/07/08/veja-o-que-abre-e-o-que-fecha-no-feriado-da-revolucao-constitucionalista-em-ribeirao-preto-e-franca.ghtml"},
-         {title:"Confira o funcionamento da cidade na quinta-feira, 09/07, feriado da Revolução Constitucionalista",source:"Pref. Piracicaba",time:"hoje",
-          url:"https://piracicaba.sp.gov.br/noticias/confira-o-funcionamento-da-cidade-na-quinta-feira-09-07-feriado-da-revolucao-constitucionalista/"},
-         {title:"\"Abre e fecha\" do feriado da Revolução de 1932 – de 09 a 12 de julho",source:"Pref. Itapetininga",time:"hoje",
-          url:"https://www.itapetininga.sp.gov.br/noticia/10511/abre-e-fecha-do-feriado-da-revolucao-de-1932-de-09-a-12-de-julho/"}
+         {title:"PF investiga uso de declarações falsas de indígenas para fraudes no INSS",source:"Diário do Nordeste",time:"hoje",
+          url:"https://diariodonordeste.verdesmares.com.br/ultima-hora/pais/pf-investiga-uso-de-declaracoes-falsas-de-indigenas-para-fraudes-no-inss-1.3776060"},
+         {title:"Polícia Federal investiga fraude no INSS com falsos indígenas",source:"Agência Brasil",time:"hoje",
+          url:"https://agenciabrasil.ebc.com.br/geral/noticia/2026-01/policia-federal-investiga-fraude-no-inss-com-falsos-indigenas"},
+         {title:"Ação da PF mira fraudes no INSS com declarações falsas de indígenas",source:"Poder360",time:"hoje",
+          url:"https://www.poder360.com.br/poder-justica/acao-da-pf-mira-fraudes-no-inss-com-declaracoes-falsas-de-indigenas/"}
        ]}
     ]
   },
