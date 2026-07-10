@@ -341,9 +341,9 @@ body::before{
    DADOS — hoje é manual. Depois, um script busca no Google
    Trends + IA gera resumo/score e grava este mesmo JSON.
 ========================================================= */
-/* Dados REAIS coletados em 09/07/2026:
+/* Dados REAIS coletados em 10/07/2026:
    - ranking e tráfego: RSS oficial trends.google.com/trending/rss?geo=BR
-   - epicentro geográfico: local da operação (Bahia), confirmado pelas matérias
+   - dados do IPCA/inflação de alimentos: IBGE, Band, BPMoney, Jornal de Brasília
    - notícias: URLs reais vindas do próprio feed / apuração */
 const DATA = {
   br: {
@@ -368,6 +368,26 @@ const DATA = {
           url:"https://agenciabrasil.ebc.com.br/geral/noticia/2026-01/policia-federal-investiga-fraude-no-inss-com-falsos-indigenas"},
          {title:"Ação da PF mira fraudes no INSS com declarações falsas de indígenas",source:"Poder360",time:"hoje",
           url:"https://www.poder360.com.br/poder-justica/acao-da-pf-mira-fraudes-no-inss-com-declaracoes-falsas-de-indigenas/"}
+       ]},
+      {kw:"IPCA", growth:"1 mil+ buscas", score:81, vol:"1 mil+ buscas", comp:"Média",
+       why:"Os dados do IPCA/IPCA-15 do 1º semestre de 2026 mostram a inflação de alimentos praticamente dobrando: tomate acumula alta de 103,84%, cenoura 103,1% e batata-inglesa 100,2% no período, com açaí (+57,29%) e feijão-carioca (+32,56%) também pressionando o carrinho. Alimentação e bebidas e Habitação responderam juntas por cerca de 66% da inflação de junho. Parte do choque vem do conflito Irã x EUA, iniciado em 28 de fevereiro, que elevou o petróleo e o custo do diesel — levando a Fazenda a subir a projeção do IPCA de 2026 para 4,5%.",
+       ops:["Guia \"alimentos que mais subiram de preço em 2026\"","Calculadora de impacto da inflação no orçamento familiar","Comparativo de preços de supermercado antes/depois","Pauta sobre o efeito da guerra Irã-EUA nos preços no Brasil"],
+       regions:[{name:"São Paulo",val:100},{name:"Distrito Federal",val:34},{name:"Rio de Janeiro",val:29},{name:"Minas Gerais",val:21},{name:"Rio Grande do Sul",val:14}],
+       regionNote:"concentrado nos grandes centros econômicos",
+       topToday:[
+         {name:"Alexander Zverev", traffic:"2 mil+", val:2000},
+         {name:"IPCA", traffic:"1 mil+", val:1000},
+         {name:"Prefeitura de Vitória da Conquista", traffic:"1 mil+", val:1000},
+         {name:"BTS", traffic:"1 mil+", val:1000},
+         {name:"Gás do Povo", traffic:"500+", val:500}
+       ],
+       news:[
+         {title:"IPCA-15 sobe 0,41% em junho com alta dos alimentos e da energia",source:"Band",time:"hoje",
+          url:"https://www.band.com.br/economia/noticias/ipca-15-sobe-041-em-junho-com-alta-dos-alimentos-e-da-energia-202606251130"},
+         {title:"Tomate, cenoura e batata acumulam alta superior a 100% no primeiro semestre de 2026",source:"BPMoney",time:"hoje",
+          url:"https://bpmoney.com.br/economia/tomate-cenoura-batata-alta-100-por-cento-2026-ipca-15"},
+         {title:"Fazenda eleva projeção do IPCA de 2026 a 4,5% por desdobramentos do conflito no Oriente Médio",source:"Jornal de Brasília",time:"hoje",
+          url:"https://jornaldebrasilia.com.br/noticias/economia/fazenda-eleva-projecao-do-ipca-de-2026-a-45-por-desdobramentos-do-conflito-no-oriente-medio/"}
        ]}
     ]
   },
