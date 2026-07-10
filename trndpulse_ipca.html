@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>TrndPulse — IPCA · Sexta, 10 Jul</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--g:#22ff9a;--gd:#1ad47a;--w:#f4f4f5;--m:#8b8f98}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080808;font-family:'Sora',sans-serif;color:var(--w);padding:32px 20px 80px}
+h1{font-family:'Unbounded';font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#222;text-align:center;margin-bottom:6px}
+.sub{text-align:center;font-size:11px;color:#1e1e1e;margin-bottom:8px}
+.wtag{text-align:center;font-family:'Unbounded';font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:40px}
+.sl{font-family:'Unbounded';font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#222;margin:44px 0 14px}
+.row{display:flex;gap:28px;overflow-x:auto;padding-bottom:20px;align-items:flex-start}
+.row::-webkit-scrollbar{height:4px}
+.row::-webkit-scrollbar-thumb{background:#1e1e1e;border-radius:2px}
+.aw{flex-shrink:0;display:flex;flex-direction:column;gap:10px;width:270px}
+.al{font-family:'Unbounded';font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2e2e2e}
+.csq{width:270px;height:270px;position:relative;border-radius:8px;overflow:hidden;cursor:pointer}
+.cr{width:270px;height:480px;position:relative;border-radius:8px;overflow:hidden;cursor:pointer}
+.csq:hover .db,.cr:hover .db{opacity:1}
+.isq{position:absolute;top:0;left:0;width:1080px;height:1080px;transform:scale(0.25);transform-origin:top left;overflow:hidden}
+.ir{position:absolute;top:0;left:0;width:1080px;height:1920px;transform:scale(0.25);transform-origin:top left;overflow:hidden}
+.db{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);backdrop-filter:blur(8px);color:#fff;font-family:'Unbounded';font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:0.5px solid rgba(255,255,255,.15);cursor:pointer;opacity:0;transition:opacity .2s;white-space:nowrap;z-index:10}
+.db:hover{background:var(--g);color:#050505}
+.db.done{background:rgba(34,255,154,.15);color:var(--g);opacity:1}
+.db.busy{opacity:1;pointer-events:none}
+.cb{background:#0c0c0d;border:0.5px solid #1a1a1e;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.ct{font-family:'Unbounded';font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--g)}
+.cx{font-family:'Sora';font-size:11px;color:#555;line-height:1.65;white-space:pre-wrap}
+/* design helpers */
+.gw{position:absolute;border-radius:50%;pointer-events:none}
+.scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 4px);pointer-events:none}
+.ticker{display:flex;align-items:center;gap:12px;background:rgba(34,255,154,.08);border:1px solid rgba(34,255,154,.18);border-radius:10px;padding:14px 20px}
+.ticker-val{font-family:'Unbounded';font-size:26px;font-weight:800;color:var(--g)}
+.ticker-lbl{font-family:'Sora';font-size:18px;color:rgba(255,255,255,.45)}
+</style>
+</head>
+<body>
+
+<h1>TRNDPULSE</h1>
+<p class="sub">trndpulse.vercel.app · @trndpulse</p>
+<p class="wtag">— Palavra do Dia · IPCA · 🇧🇷 Brasil · Sexta, 10 de Julho —</p>
+
+<div class="sl">Posts · 1080×1080</div>
+<div class="row">
+
+<!-- POST 1 — SPLIT hero: palavra enorme esquerda + dados direita -->
+<div class="aw">
+  <div class="al">Post 1 · Hero split</div>
+  <div class="csq">
+    <div class="isq" id="p1" style="background:#0a0a0a;display:flex;flex-direction:row">
+      <div class="scan"></div>
+      <div class="gw" style="width:700px;height:700px;top:-200px;left:-200px;background:radial-gradient(circle,rgba(34,255,154,.09) 0%,transparent 65%)"></div>
+      <!-- left half -->
+      <div style="width:480px;flex-shrink:0;padding:60px 50px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(34,255,154,.1)">
+        <div style="font-family:'Unbounded';font-size:22px;font-weight:800;letter-spacing:.1em;color:rgba(255,255,255,.07)">TP</div>
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <div style="font-family:'Unbounded';font-size:18px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:rgba(34,255,154,.5)">🇧🇷 · sexta, 10 jul</div>
+          <div style="font-family:'Unbounded';font-weight:800;font-size:168px;line-height:.85;letter-spacing:-.04em;color:#f4f4f5">IP<br>CA</div>
+        </div>
+        <div style="font-family:'Sora';font-size:18px;color:rgba(255,255,255,.2)">trndpulse.vercel.app</div>
+      </div>
+      <!-- right half -->
+      <div style="flex:1;padding:60px 48px;display:flex;flex-direction:column;justify-content:space-between">
+        <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(34,255,154,.1);border:1px solid rgba(34,255,154,.22);border-radius:99px;padding:10px 22px;align-self:flex-start">
+          <div style="width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g)"></div>
+          <span style="font-family:'Unbounded';font-size:17px;font-weight:700;color:var(--g)">Tendência do dia</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:'Unbounded';font-size:15px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25)">Volume</div>
+            <div style="font-family:'Unbounded';font-size:56px;font-weight:800;color:var(--g);line-height:1">1 mil+</div>
+            <div style="font-family:'Sora';font-size:22px;color:rgba(255,255,255,.4)">buscas hoje</div>
+          </div>
+          <div style="width:100%;height:1px;background:rgba(34,255,154,.15)"></div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:'Unbounded';font-size:15px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25)">Business Score</div>
+            <div style="font-family:'Unbounded';font-size:56px;font-weight:800;color:#f4f4f5;line-height:1">81</div>
+            <div style="font-family:'Sora';font-size:22px;color:rgba(255,255,255,.4)">Muito alto</div>
+          </div>
+          <div style="width:100%;height:1px;background:rgba(34,255,154,.15)"></div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:'Unbounded';font-size:15px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25)">Concorrência</div>
+            <div style="font-family:'Unbounded';font-size:40px;font-weight:800;color:#f4f4f5;line-height:1">Média</div>
+          </div>
+        </div>
+        <div style="font-family:'Unbounded';font-size:17px;color:rgba(34,255,154,.35)">Epicentro: SP</div>
+      </div>
+    </div>
+    <button class="db">↓ baixar</button>
+  </div>
+  <div class="cb">
+    <div class="ct">Legenda — Post 1</div>
+    <div class="cx">🇧🇷 Palavra do dia: IPCA
+
+1 mil+ buscas hoje. Business Score: 81.
+
+Os dados do IPCA/IPCA-15 do 1º semestre de 2026 mostram inflação de alimentos praticamente dobrando: tomate +103%, cenoura +103%, batata-inglesa +100%.
+
+O Brasil quer entender por que o carrinho de compras está cada vez mais caro.
+
+📊 Score 81 · Concorrência: Média · Epicentro: São Paulo
+
+trndpulse.vercel.app — link na bio
+
+#IPCA #inflacao #custodevida #tendencias #trndpulse #googletrends #empreendedorismo</div>
+  </div>
+</div>
+
+<!-- POST 2 — Tabela de preços: design tipo terminal -->
+<div class="aw">
+  <div class="al">Post 2 · Os números que chocam</div>
+  <div class="csq">
+    <div class="isq" id="p2" style="background:#060806;padding:64px 60px;display:flex;flex-direction:column;justify-content:space-between">
+      <div class="scan"></div>
+      <div class="gw" style="width:800px;height:800px;top:-300px;right:-300px;background:radial-gradient(circle,rgba(34,255,154,.07) 0%,transparent 65%)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;position:relative">
+        <div style="font-family:'Unbounded';font-size:22px;font-weight:800;color:rgba(34,255,154,.15)">TP</div>
+        <div style="font-family:'Unbounded';font-size:16px;font-weight:700;letter-spacing:.2em;color:rgba(34,255,154,.4)">IPCA · ALIMENTOS</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;flex:1;justify-content:center;position:relative">
+        <div style="font-family:'Unbounded';font-weight:800;font-size:64px;color:#f4f4f5;line-height:.95;letter-spacing:-.02em">O carrinho<br>ficou <span style="color:var(--g)">mais caro.</span></div>
+        <!-- price table -->
+        <div style="display:flex;flex-direction:column;gap:0;margin-top:16px;border:1px solid rgba(34,255,154,.12);border-radius:20px;overflow:hidden">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:22px 32px;background:rgba(34,255,154,.06);border-bottom:1px solid rgba(34,255,154,.08)">
+            <div style="font-family:'Sora';font-size:28px;color:#f4f4f5;font-weight:500">🍅 Tomate</div>
+            <div style="font-family:'Unbounded';font-size:34px;font-weight:800;color:var(--g)">+103%</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:22px 32px;background:rgba(34,255,154,.04);border-bottom:1px solid rgba(34,255,154,.08)">
+            <div style="font-family:'Sora';font-size:28px;color:#f4f4f5;font-weight:500">🥕 Cenoura</div>
+            <div style="font-family:'Unbounded';font-size:34px;font-weight:800;color:var(--g)">+103%</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:22px 32px;background:rgba(34,255,154,.06);border-bottom:1px solid rgba(34,255,154,.08)">
+            <div style="font-family:'Sora';font-size:28px;color:#f4f4f5;font-weight:500">🥔 Batata</div>
+            <div style="font-family:'Unbounded';font-size:34px;font-weight:800;color:var(--g)">+100%</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:22px 32px;background:rgba(34,255,154,.04);border-bottom:1px solid rgba(34,255,154,.08)">
+            <div style="font-family:'Sora';font-size:28px;color:#f4f4f5;font-weight:500">🍇 Açaí</div>
+            <div style="font-family:'Unbounded';font-size:34px;font-weight:800;color:var(--g)">+57%</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:22px 32px;background:rgba(34,255,154,.06)">
+            <div style="font-family:'Sora';font-size:28px;color:#f4f4f5;font-weight:500">🫘 Feijão</div>
+            <div style="font-family:'Unbounded';font-size:34px;font-weight:800;color:var(--g)">+32%</div>
+          </div>
+        </div>
+        <div style="font-family:'Sora';font-size:20px;color:rgba(255,255,255,.3)">Alta no 1º semestre de 2026</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(34,255,154,.1);padding-top:20px;position:relative">
+        <div style="font-family:'Sora';font-size:18px;color:rgba(255,255,255,.18)">trndpulse.vercel.app</div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,255,154,.1);border:1px solid rgba(34,255,154,.2);border-radius:99px;padding:8px 18px"><div style="width:6px;height:6px;border-radius:50%;background:var(--g)"></div><span style="font-family:'Unbounded';font-size:15px;font-weight:700;color:var(--g)">Brasil 🇧🇷</span></div>
+      </div>
+    </div>
+    <button class="db">↓ baixar</button>
+  </div>
+  <div class="cb">
+    <div class="ct">Legenda — Post 2</div>
+    <div class="cx">O carrinho ficou mais caro. Muito mais.
+
+Alta no 1º semestre de 2026:
+
+🍅 Tomate +103%
+🥕 Cenoura +103%
+🥔 Batata-inglesa +100%
+🍇 Açaí +57%
+🫘 Feijão-carioca +32%
+
+Alimentação e bebidas + habitação = 66% da inflação de junho.
+
+Por que? Conflito Irã x EUA elevou petróleo e diesel. A Fazenda já elevou projeção do IPCA 2026 para 4,5%.
+
+Esse é o dado que 1 mil+ pessoas buscaram hoje.
+
+trndpulse.vercel.app
+
+#IPCA #inflacao #alimentos #custodevida #tendencias #trndpulse #economia</div>
+  </div>
+</div>
+
+<!-- POST 3 — Oportunidades: layout horizontal tipo checklist -->
+<div class="aw">
+  <div class="al">Post 3 · Como ganhar dinheiro</div>
+  <div class="csq">
+    <div class="isq" id="p3" style="background:#0a0a0a;padding:64px 60px;display:flex;flex-direction:column;justify-content:space-between">
+      <div class="scan"></div>
+      <div class="gw" style="width:700px;height:700px;bottom:-200px;left:-100px;background:radial-gradient(circle,rgba(34,255,154,.08) 0%,transparent 65%)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;position:relative">
+        <div style="font-family:'Unbounded';font-size:22px;font-weight:800;color:rgba(255,255,255,.06)">TP</div>
+        <div style="font-family:'Unbounded';font-size:16px;font-weight:700;letter-spacing:.2em;color:rgba(34,255,154,.4)">como ganhar</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:28px;flex:1;justify-content:center;position:relative">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="width:44px;height:3px;background:var(--g);border-radius:2px"></div>
+          <div style="font-family:'Unbounded';font-weight:800;font-size:72px;color:#f4f4f5;line-height:.95;letter-spacing:-.02em">4 formas<br>de faturar<br>com <span style="color:var(--g)">IPCA<br>agora.</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:24px;align-items:flex-start;padding:22px 26px;background:rgba(34,255,154,.05);border-left:3px solid var(--g);border-radius:0 14px 14px 0">
+            <span style="font-family:'Unbounded';font-size:24px;font-weight:800;color:var(--g);flex-shrink:0;width:44px">01</span>
+            <span style="font-family:'Sora';font-size:26px;color:#f4f4f5;line-height:1.35">Guia "alimentos que mais subiram de preço em 2026"</span>
+          </div>
+          <div style="display:flex;gap:24px;align-items:flex-start;padding:22px 26px;background:rgba(34,255,154,.05);border-left:3px solid var(--g);border-radius:0 14px 14px 0">
+            <span style="font-family:'Unbounded';font-size:24px;font-weight:800;color:var(--g);flex-shrink:0;width:44px">02</span>
+            <span style="font-family:'Sora';font-size:26px;color:#f4f4f5;line-height:1.35">Calculadora de impacto da inflação no orçamento familiar</span>
+          </div>
+          <div style="display:flex;gap:24px;align-items:flex-start;padding:22px 26px;background:rgba(34,255,154,.05);border-left:3px solid var(--g);border-radius:0 14px 14px 0">
+            <span style="font-family:'Unbounded';font-size:24px;font-weight:800;color:var(--g);flex-shrink:0;width:44px">03</span>
+            <span style="font-family:'Sora';font-size:26px;color:#f4f4f5;line-height:1.35">Comparativo de preços de supermercado antes/depois</span>
+          </div>
+          <div style="display:flex;gap:24px;align-items:flex-start;padding:22px 26px;background:rgba(34,255,154,.05);border-left:3px solid var(--g);border-radius:0 14px 14px 0">
+            <span style="font-family:'Unbounded';font-size:24px;font-weight:800;color:var(--g);flex-shrink:0;width:44px">04</span>
+            <span style="font-family:'Sora';font-size:26px;color:#f4f4f5;line-height:1.35">Pauta sobre efeito da guerra Irã-EUA nos preços</span>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(34,255,154,.1);padding-top:20px;font-family:'Sora';font-size:18px;color:rgba(255,255,255,.18);position:relative">trndpulse.vercel.app</div>
+    </div>
+    <button class="db">↓ baixar</button>
+  </div>
+  <div class="cb">
+    <div class="ct">Legenda — Post 3</div>
+    <div class="cx">IPCA explodiu hoje. 1 mil+ buscas. Business Score: 81.
+
+4 formas de produzir conteúdo e faturar agora:
+
+01 → Guia "alimentos que mais subiram de preço em 2026"
+02 → Calculadora de impacto da inflação no orçamento familiar
+03 → Comparativo de preços de supermercado antes/depois
+04 → Pauta sobre o efeito da guerra Irã-EUA nos preços brasileiros
+
+Todo brasileiro que foi ao supermercado esta semana está sentindo isso. Quem explica melhor chega primeiro.
+
+📡 trndpulse.vercel.app
+
+#IPCA #inflacao #empreendedorismo #criadordeconteudo #tendencias #trndpulse #oportunidade</div>
+  </div>
+</div>
+
+<!-- POST 4 — Notícias: fundo branco puro -->
+<div class="aw">
+  <div class="al">Post 4 · Notícias · fundo branco</div>
+  <div class="csq">
+    <div class="isq" id="p4" style="background:#f7f7f2;padding:64px 60px;display:flex;flex-direction:column;justify-content:space-between">
+      <div style="display:flex;justify-content:space-between;align-items:center;position:relative">
+        <div style="font-family:'Unbounded';font-size:22px;font-weight:800;color:rgba(34,255,154,.22)">TP</div>
+        <div style="font-family:'Unbounded';font-size:16px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,0,0,.2)">imprensa hoje</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px;flex:1;justify-content:center;position:relative">
+        <div style="font-family:'Unbounded';font-weight:800;font-size:72px;color:#080808;line-height:.95;letter-spacing:-.02em">A imprensa<br>falou.<br><span style="color:#1ad47a">O Brasil<br>buscou.</span></div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+          <div style="padding:22px 26px;background:rgba(34,255,154,.1);border-radius:16px;border-left:4px solid #1ad47a">
+            <div style="font-family:'Sora';font-size:24px;color:#080808;font-weight:500;line-height:1.4">IPCA-15 sobe 0,41% em junho com alta dos alimentos e da energia</div>
+            <div style="font-family:'Unbounded';font-size:14px;color:#1ad47a;margin-top:8px;letter-spacing:.08em">BAND · HOJE</div>
+          </div>
+          <div style="padding:22px 26px;background:rgba(34,255,154,.1);border-radius:16px;border-left:4px solid #1ad47a">
+            <div style="font-family:'Sora';font-size:24px;color:#080808;font-weight:500;line-height:1.4">Tomate, cenoura e batata acumulam alta superior a 100% no 1º semestre</div>
+            <div style="font-family:'Unbounded';font-size:14px;color:#1ad47a;margin-top:8px;letter-spacing:.08em">BPMONEY · HOJE</div>
+          </div>
+          <div style="padding:22px 26px;background:rgba(34,255,154,.1);border-radius:16px;border-left:4px solid #1ad47a">
+            <div style="font-family:'Sora';font-size:24px;color:#080808;font-weight:500;line-height:1.4">Fazenda eleva projeção do IPCA de 2026 a 4,5% por desdobramentos do conflito no Oriente Médio</div>
+            <div style="font-family:'Unbounded';font-size:14px;color:#1ad47a;margin-top:8px;letter-spacing:.08em">JORNAL DE BRASÍLIA · HOJE</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,0,0,.08);padding-top:18px">
+        <div style="font-family:'Sora';font-size:18px;color:rgba(0,0,0,.3)">trndpulse.vercel.app</div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,255,154,.15);border:1px solid rgba(26,212,122,.3);border-radius:99px;padding:8px 18px"><div style="width:6px;height:6px;border-radius:50%;background:#1ad47a"></div><span style="font-family:'Unbounded';font-size:15px;font-weight:700;color:#1ad47a">Brasil 🇧🇷</span></div>
+      </div>
+    </div>
+    <button class="db">↓ baixar</button>
+  </div>
+  <div class="cb">
+    <div class="ct">Legenda — Post 4</div>
+    <div class="cx">A imprensa falou. O Brasil buscou.
+
+3 notícias publicadas hoje sobre o IPCA:
+
+→ IPCA-15 sobe 0,41% em junho com alta dos alimentos e da energia (Band)
+→ Tomate, cenoura e batata acumulam alta superior a 100% no 1º semestre (BPMoney)
+→ Fazenda eleva projeção do IPCA de 2026 a 4,5% por desdobramentos do conflito no Oriente Médio (Jornal de Brasília)
+
+Quando a grande imprensa cobre, a busca explode.
+Esse é o momento de criar conteúdo — não depois.
+
+📡 trndpulse.vercel.app
+
+#IPCA #inflacao #imprensa #tendencias #trndpulse #economia #criadordeconteudo</div>
+  </div>
+</div>
+
+</div>
+
+<!-- REELS -->
+<div class="sl">Reels · 1080×1920</div>
+<div class="row">
+
+<!-- REEL 1 — Hook: layout tipográfico puro -->
+<div class="aw">
+  <div class="al">Reel 1 · Hook tipográfico</div>
+  <div class="cr">
+    <div class="ir" id="r1" style="background:#0a0a0a;padding:72px 62px;display:flex;flex-direction:column;justify-content:space-between">
+      <div class="scan"></div>
+      <div class="gw" style="width:900px;height:900px;top:-400px;right:-400px;background:radial-gradient(circle,rgba(34,255,154,.07) 0%,transparent 60%)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;position:relative">
+        <div style="font-family:'Unbounded';font-size:22px;font-weight:800;color:rgba(255,255,255,.06)">TP</div>
+        <div style="font-family:'Unbounded';font-size:15px;font-weight:700;letter-spacing:.18em;color:rgba(34,255,154,.35)">@trndpulse</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:56px;position:relative">
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <div style="font-family:'Unbounded';font-size:18px;font-weight:700;letter-spacing:.22em;color:rgba(34,255,154,.5)">sexta · 10 jul · 🇧🇷</div>
+          <div style="font-family:'Unbounded';font-weight:800;font-size:160px;color:#f4f4f5;line-height:.82;letter-spacing:-.04em">IP<br>CA</div>
+          <div style="display:inline-flex;align-items:center;gap:14px;background:rgba(34,255,154,.1);border:1px solid rgba(34,255,154,.25);border-radius:99px;padding:16px 32px;align-self:flex-start">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 10px var(--g)"></div>
+            <span style="font-family:'Unbounded';font-size:26px;font-weight:700;color:var(--g)">▲ 1 mil+ buscas hoje</span>
+          </div>
+        </div>
+        <div style="width:52px;height:3px;background:var(--g);border-radius:2px"></div>
+        <div style="font-family:'Sora';font-size:34px;color:rgba(255,255,255,.5);line-height:1.55;max-width:820px">Os dados do IPCA mostram inflação de alimentos <strong style="color:#f4f4f5;font-weight:600">praticamente dobrando</strong> — tomate, cenoura e batata subiram mais de <strong style="color:var(--g);font-weight:600">100% em seis meses.</strong></div>
+        <div style="padding:34px 40px;background:rgba(34,255,154,.07);border:1px solid rgba(34,255,154,.15);border-radius:22px">
+          <div style="font-family:'Unbounded';font-size:28px;font-weight:700;color:#f4f4f5;line-height:1.4">Business Score <span style="color:var(--g)">81.</span><br>Concorrência: Média.<br>Janela aberta.</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(34,255,154,.08);padding-top:22px;position:relative">
+        <div style="font-family:'Sora';font-size:20px;color:rgba(255,255,255,.18)">trndpulse.vercel.app</div>
+        <div style="font-family:'Unbounded';font-size:20px;color:rgba(34,255,154,.5)">↑ Segue</div>
+      </div>
+    </div>
+    <button class="db">↓ baixar</button>
+  </div>
+  <div class="cb">
+    <div class="ct">Legenda — Reel 1</div>
+    <div class="cx">IPCA. 1 mil+ buscas hoje. Business Score: 81.
+
+Os dados do IPCA/IPCA-15 do 1º semestre de 2026 mostram inflação de alimentos praticamente dobrando:
+
+🍅 Tomate +103%
+🥕 Cenoura +103%
+🥔 Batata-inglesa +100%
+🍇 Açaí +57%
+🫘 Feijão +32%
+
+Alimentação e habitação juntas = 66% da inflação de junho.
+
+O motivo: conflito Irã x EUA elevou petróleo e diesel, pressionando toda a cadeia.
+
+Business Score 81 · Concorrência: Média · Janela aberta.
+
+📡 trndpulse.vercel.app — link na bio
+
+#IPCA #inflacao #custodevida #tendencias #trndpulse #googletrends #economia</div>
+  </div>
+</div>
+
+<!-- REEL 2 — Análise: barras por estado + ranking -->
+<div class="aw">
+  <div class="al">Reel 2 · Análise por estado</div>
+  <div class="cr">
+    <div class="ir" id="r2" style="background:#060806;padding:72px 62px;display:flex;flex-direction:column;justify-content:space-between">
+      <div class="scan"></div>
+      <div class="gw" style="width:800px;height:800px;top:-250px;left:-250px;background:radial-gradient(circle,rgba(34,255,154,.10) 0%,transparent 60%)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;position:relative">
+        <div style="font-family:'Unbounded';font-size:22px;font-weight:800;color:rgba(34,255,154,.2)">TP</div>
+        <div style="font-family:'Unbounded';font-size:15px;font-weight:700;letter-spacing:.18em;color:rgba(34,255,154,.35)">análise completa</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:36px;position:relative">
+        <!-- pills -->
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,255,154,.1);border:1px solid rgba(34,255,154,.22);border-radius:99px;padding:8px 20px"><div style="width:6px;height:6px;border-radius:50%;background:var(--g)"></div><span style="font-family:'Unbounded';font-size:16px;font-weight:700;color:var(--g)">IPCA</span></div>
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,255,154,.1);border:1px solid rgba(34,255,154,.22);border-radius:99px;padding:8px 20px"><div style="width:6px;height:6px;border-radius:50%;background:var(--g)"></div><span style="font-family:'Unbounded';font-size:16px;font-weight:700;color:var(--g)">🇧🇷 Brasil</span></div>
+        </div>
+        <!-- score grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:rgba(34,255,154,.07);border:1px solid rgba(34,255,154,.18);border-radius:18px;padding:26px">
+            <div style="font-family:'Unbounded';font-size:52px;font-weight:800;color:var(--g)">81</div>
+            <div style="font-family:'Sora';font-size:20px;color:rgba(255,255,255,.4);margin-top:6px">Business Score</div>
+          </div>
+          <div style="background:rgba(34,255,154,.07);border:1px solid rgba(34,255,154,.18);border-radius:18px;padding:26px">
+            <div style="font-family:'Unbounded';font-size:38px;font-weight:800;color:var(--g)">1 mil+</div>
+            <div style="font-family:'Sora';font-size:20px;color:rgba(255,255,255,.4);margin-top:6px">buscas hoje</div>
+          </div>
+          <div style="background:rgba(34,255,154,.07);border:1px solid rgba(34,255,154,.18);border-radius:18px;padding:26px">
+            <div style="font-family:'Unbounded';font-size:36px;font-weight:800;color:var(--g)">Média</div>
+            <div style="font-family:'Sora';font-size:20px;color:rgba(255,255,255,.4);margin-top:6px">concorrência</div>
+          </div>
+          <div style="background:rgba(34,255,154,.07);border:1px solid rgba(34,255,154,.18);border-radius:18px;padding:26px">
+            <div style="font-family:'Unbounded';font-size:36px;font-weight:800;color:var(--g)">4,5%</div>
+            <div style="font-family:'Sora';font-size:20px;color:rgba(255,255,255,.4);margin-top:6px">projeção IPCA</div>
+          </div>
+        </div>
+        <!-- onde buscam -->
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="font-family:'Unbounded';font-size:15px;font-weight:700;letter-spacing:.2em;color:rgba(34,255,154,.4)">onde mais buscam</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="font-family:'Sora';font-size:22px;color:rgba(255,255,255,.6);width:270px;flex-shrink:0">Distrito Federal</div>
+              <div style="flex:1;height:9px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden"><div style="width:100%;height:100%;background:var(--g);border-radius:99px"></div></div>
+              <div style="font-family:'Unbounded';font-size:20px;color:var(--g);width:36px;text-align:right">34</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="font-family:'Sora';font-size:22px;color:rgba(255,255,255,.6);width:270px;flex-shrink:0">Rio de Janeiro</div>
+              <div style="flex:1;height:9px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden"><div style="width:85%;height:100%;background:var(--g);border-radius:99px"></div></div>
+              <div style="font-family:'Unbounded';font-size:20px;color:var(--g);width:36px;text-align:right">29</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="font-family:'Sora';font-size:22px;color:rgba(255,255,255,.6);width:270px;flex-shrink:0">Minas Gerais</div>
+              <div style="flex:1;height:9px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden"><div style="width:62%;height:100%;background:var(--g);border-radius:99px"></div></div>
+              <div style="font-family:'Unbounded';font-size:20px;color:var(--g);width:36px;text-align:right">21</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="font-family:'Sora';font-size:22px;color:rgba(255,255,255,.6);width:270px;flex-shrink:0">Rio Grande do Sul</div>
+              <div style="flex:1;height:9px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden"><div style="width:41%;height:100%;background:var(--g);border-radius:99px"></div></div>
+              <div style="font-family:'Unbounded';font-size:20px;color:var(--g);width:36px;text-align:right">14</div>
+            </div>
+          </div>
+        </div>
+        <!-- também em alta -->
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="font-family:'Unbounded';font-size:15px;font-weight:700;letter-spacing:.2em;color:rgba(34,255,154,.4)">também em alta hoje</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(34,255,154,.08);border-radius:12px">
+              <span style="font-size:24px;color:rgba(255,255,255,.6)">Prefeitura de Vitória da Conquista</span>
+              <span style="font-family:'Unbounded';font-size:18px;color:var(--g)">▲ 1 mil+</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(34,255,154,.08);border-radius:12px">
+              <span style="font-size:24px;color:rgba(255,255,255,.6)">BTS</span>
+              <span style="font-family:'Unbounded';font-size:18px;color:var(--g)">▲ 1 mil+</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(34,255,154,.08);border-radius:12px">
+              <span style="font-size:24px;color:rgba(255,255,255,.6)">Gás do Povo</span>
+              <span style="font-family:'Unbounded';font-size:18px;color:var(--g)">▲ 500+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(34,255,154,.08);padding-top:22px;position:relative">
+        <div style="font-family:'Sora';font-size:20px;color:rgba(255,255,255,.18)">trndpulse.vercel.app</div>
+        <div style="font-family:'Unbounded';font-size:20px;color:rgba(34,255,154,.5)">↑ Próximo</div>
+      </div>
+    </div>
+    <button class="db">↓ baixar</button>
+  </div>
+  <div class="cb">
+    <div class="ct">Legenda — Reel 2</div>
+    <div class="cx">Análise completa · IPCA · Sexta, 10 de Julho.
+
+📊 Business Score: 81 — Muito alto
+🔍 Volume: 1 mil+ buscas
+⚡ Concorrência: Média
+📈 Projeção IPCA 2026: 4,5%
+
+Onde mais buscam:
+1º Distrito Federal (34)
+2º Rio de Janeiro (29)
+3º Minas Gerais (21)
+4º Rio Grande do Sul (14)
+
+Também em alta hoje:
+↑ Prefeitura de Vitória da Conquista — 1 mil+
+↑ BTS — 1 mil+
+↑ Gás do Povo — 500+
+
+📡 trndpulse.vercel.app
+
+#IPCA #inflacao #tendencias #businessscore #googletrends #trndpulse #economia</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.db').forEach(btn=>{
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(this.classList.contains('busy'))return;
+    const card=this.closest('.csq,.cr');
+    const inner=card.querySelector('[id]');
+    const isSq=card.classList.contains('csq');
+    const W=1080,H=isSq?1080:1920;
+    const self=this;
+    self.classList.add('busy');self.textContent='⏳ gerando...';
+    const pT=inner.style.transform,pW=inner.style.width,pH=inner.style.height;
+    inner.style.transform='none';inner.style.width=W+'px';inner.style.height=H+'px';
+    html2canvas(inner,{scale:1,useCORS:true,allowTaint:true,width:W,height:H,windowWidth:W,windowHeight:H,backgroundColor:null,logging:false}).then(c=>{
+      inner.style.transform=pT;inner.style.width=pW;inner.style.height=pH;
+      const a=document.createElement('a');
+      a.download='trndpulse_ipca_'+inner.id+'.png';
+      a.href=c.toDataURL('image/png');a.click();
+      self.textContent='✓ baixado';self.classList.remove('busy');self.classList.add('done');
+      setTimeout(()=>{self.classList.remove('done');self.textContent='↓ baixar'},3000);
+    }).catch(()=>{
+      inner.style.transform=pT;inner.style.width=pW;inner.style.height=pH;
+      self.textContent='↓ baixar';self.classList.remove('busy');
+    });
+  });
+});
+</script>
+</body>
+</html>

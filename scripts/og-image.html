@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{
+  background:#0b0a08;
+  font-family:'JetBrains Mono',monospace;
+  position:relative;
+  color:#f4efe4;
+}
+body::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(1000px 560px at 50% -12%, rgba(46,232,138,.28), transparent 60%),
+             radial-gradient(700px 500px at 100% 100%, rgba(200,255,94,.10), transparent 60%);
+}
+.grain{
+  position:absolute;inset:0;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{
+  position:relative;z-index:1;width:100%;height:100%;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:56px 64px;
+}
+.top{display:flex;align-items:center;gap:12px}
+.logo-mark{
+  width:34px;height:34px;border-radius:8px;
+  background:linear-gradient(160deg,#2ee88a,#c8ff5e);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Archivo Black';font-size:18px;color:#0b0a08;
+}
+.logo-word{font-family:'Archivo Black';font-size:20px;letter-spacing:.01em}
+.dot{width:8px;height:8px;border-radius:50%;background:#c8ff5e;box-shadow:0 0 0 4px rgba(200,255,94,.15)}
+.mid{display:flex;flex-direction:column;gap:22px;max-width:980px}
+.rank{
+  font-size:15px;letter-spacing:.24em;color:#8d8577;text-transform:uppercase;
+  display:flex;align-items:center;gap:12px;
+}
+.rank::before{content:"";width:26px;height:2px;background:#2ee88a}
+.kw{
+  font-family:'Archivo Black';font-weight:400;font-size:88px;line-height:1.04;
+  letter-spacing:-.01em;text-transform:uppercase;
+}
+.growth{
+  display:inline-flex;align-self:flex-start;align-items:center;gap:10px;
+  background:rgba(200,255,94,.1);color:#c8ff5e;
+  border:2px dashed rgba(200,255,94,.45);
+  padding:12px 22px;border-radius:6px;font-weight:700;font-size:22px;letter-spacing:.03em;
+}
+.bottom{display:flex;align-items:flex-end;justify-content:space-between}
+.stat{display:flex;gap:38px}
+.stat div{display:flex;flex-direction:column;gap:4px}
+.stat .label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8d8577}
+.stat .val{font-size:24px;font-weight:700;color:#f4efe4}
+.claim{font-size:14px;color:#8d8577;letter-spacing:.02em;text-align:right}
+.claim b{color:#2ee88a}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+  <div class="top">
+    <div class="logo-mark">T</div>
+    <div class="logo-word">TrendPulse</div>
+    <span class="dot"></span>
+  </div>
+  <div class="mid">
+    <div class="rank">Tendências reais · Google Trends 🇧🇷</div>
+    <div class="kw">A oportunidade<br>do dia.</div>
+    <span class="growth">▲ atualizado todo dia</span>
+  </div>
+  <div class="bottom">
+    <div class="stat">
+      <div><span class="label">Business Score</span><span class="val">0–100</span></div>
+      <div><span class="label">Cobertura</span><span class="val">Brasil</span></div>
+    </div>
+    <div class="claim">Transforme tendências<br>em <b>negócio</b>.</div>
+  </div>
+</div>
+</body>
+</html>

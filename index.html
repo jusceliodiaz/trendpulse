@@ -5,9 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0b0a08">
 <title>TrendPulse — A oportunidade do dia</title>
+<meta name="description" content="Todo dia, a tendência de busca real do Google Trends no Brasil transformada em oportunidade de negócio: business score, volume, concorrência e ideias de monetização.">
+<meta name="keywords" content="google trends, tendências, oportunidade de negócio, SEO, marketing de conteúdo, Brasil">
+<meta name="author" content="TrendPulse">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trendpulse.vercel.app/">
+
+<!-- Open Graph / Facebook, WhatsApp, LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TrendPulse">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://trendpulse.vercel.app/">
+<meta property="og:title" content="TrendPulse — A oportunidade do dia">
+<meta property="og:description" content="Todo dia, a tendência de busca real do Google Trends no Brasil transformada em oportunidade de negócio: business score, volume, concorrência e ideias de monetização.">
+<meta property="og:image" content="https://trendpulse.vercel.app/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TrendPulse — a oportunidade do dia, atualizada com dados reais do Google Trends">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TrendPulse — A oportunidade do dia">
+<meta name="twitter:description" content="Todo dia, a tendência de busca real do Google Trends no Brasil transformada em oportunidade de negócio.">
+<meta name="twitter:image" content="https://trendpulse.vercel.app/images/og-image.png">
+
+<link rel="icon" type="image/png" href="images/logo.png">
+<link rel="apple-touch-icon" href="images/logo.png">
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "TrendPulse",
+  "url": "https://trendpulse.vercel.app/",
+  "description": "Tendências de busca reais do Google Trends no Brasil, transformadas em oportunidades de negócio todos os dias.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "pt-BR",
+  "image": "https://trendpulse.vercel.app/images/og-image.png"
+}
+</script>
 <style>
 :root{
   --bg:#0b0a08;
@@ -327,8 +366,6 @@ body::before{
   <div class="top">
     <div class="logo"><img src="images/logo.png" alt="TrendPulse" class="logo-img"><span class="dot"></span></div>
   </div>
-  <div class="date" id="date"></div>
-
   <div class="tabs" id="tabs"></div>
 
   <div class="layout" id="layout"></div>
@@ -398,11 +435,6 @@ const DATA = {
 const ORDER = ["br","us","eu","as"];
 let current = "br";
 
-/* date */
-const d = new Date();
-document.getElementById("date").innerHTML =
-  `Bom dia. Hoje é <b>${d.toLocaleDateString('pt-BR',{weekday:'long', day:'numeric', month:'long'})}</b>.`;
-
 /* tabs */
 const tabsEl = document.getElementById("tabs");
 ORDER.forEach(k=>{
@@ -444,31 +476,15 @@ function timeline(trends,i){
   </div></div>`;
 }
 
-/* regiões: destaque gigante da líder + barras das demais */
+/* regiões: barras de interesse por estado, líder incluída */
 function regionBlock(regions,note){
-  const [top,...rest]=regions;
-  const bars=rest.map((r,i)=>`
+  const bars=regions.map((r,i)=>`
     <div class="region-row">
       <span class="region-name">${r.name}</span>
       <div class="region-bar"><div class="region-fill" style="width:${r.val}%;animation-delay:${i*70}ms"></div></div>
       <span class="region-val">${r.val}</span>
     </div>`).join("");
-  return `
-    <div class="spot">
-      <svg class="spot-icon" viewBox="0 0 64 44">
-        <rect x="4" y="20" width="12" height="24" rx="1"/>
-        <rect x="20" y="8" width="12" height="36" rx="1"/>
-        <rect x="36" y="15" width="12" height="29" rx="1"/>
-        <rect x="52" y="24" width="8" height="20" rx="1"/>
-        <rect class="win" x="24" y="15" width="4" height="4" style="animation-delay:0s"/>
-        <rect class="win" x="24" y="23" width="4" height="4" style="animation-delay:.5s"/>
-        <rect class="win" x="8" y="26" width="4" height="4" style="animation-delay:1.1s"/>
-        <rect class="win" x="40" y="21" width="4" height="4" style="animation-delay:1.7s"/>
-      </svg>
-      <div class="spot-num">${top.name}</div>
-      <div class="spot-sub">índice de interesse ${top.val}/100 · ${note}</div>
-    </div>
-    ${bars}`;
+  return `<div class="spot-sub" style="text-align:left;margin-bottom:10px">${note}</div>${bars}`;
 }
 
 /* também em alta hoje: lista compacta em formato de leaderboard */
